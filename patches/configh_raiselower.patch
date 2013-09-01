@@ -1,0 +1,12 @@
+diff -r fa5e9ed542d1 config.def.h
+--- a/config.def.h	Sat Nov 01 12:58:19 2008 +0100
++++ b/config.def.h	Sat Nov 01 12:59:34 2008 +0100
+@@ -80,6 +80,8 @@
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY,                       XK_period, raisewindow,    {.i = 1 } },
++	{ MODKEY,                       XK_comma,  raisewindow,    {.i = -1 } },
+ 	{ MODKEY,                       XK_a,      moveresize,     {.v = "-10x 0y 0w 0h" } },
+ 	{ MODKEY,                       XK_d,      moveresize,     {.v = "10x 0y 0w 0h" } },
+ 	{ MODKEY,                       XK_s,      moveresize,     {.v = "0x 10y 0w 0h" } },

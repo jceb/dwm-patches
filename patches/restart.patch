@@ -1,0 +1,33 @@
+# HG changeset patch
+# Parent c794a9f5ae5eee168e8995c31e0dcad46a764ef9
+
+Index: dwm/dwm.c
+===================================================================
+--- dwm.orig/dwm.c
++++ dwm/dwm.c
+@@ -259,6 +259,7 @@ static void (*handler[LASTEvent]) (XEven
+ };
+ static Atom wmatom[WMLast], netatom[NetLast];
+ static Bool running = True;
++static Bool restart = False;
+ static Cur *cursor[CurLast];
+ static ClrScheme scheme[SchemeLast];
+ static Display *dpy;
+@@ -1226,6 +1227,8 @@ propertynotify(XEvent *e) {
+ 
+ void
+ quit(const Arg *arg) {
++	if(arg->i)
++		restart = True;
+ 	running = False;
+ }
+ 
+@@ -2057,6 +2060,8 @@ main(int argc, char *argv[]) {
+ 	setup();
+ 	scan();
+ 	run();
++	if(restart)
++		execvp(argv[0], argv);
+ 	cleanup();
+ 	XCloseDisplay(dpy);
+ 	return EXIT_SUCCESS;

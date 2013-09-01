@@ -1,0 +1,66 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -1,11 +1,11 @@
+ /* See LICENSE file for copyright and license details. */
+ 
+ /* appearance */
+-static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
++static const char font[]            = "-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
+ static const char normbordercolor[] = "#444444";
+ static const char normbgcolor[]     = "#222222";
+ static const char normfgcolor[]     = "#bbbbbb";
+-static const char selbordercolor[]  = "#005577";
++static const char selbordercolor[]  = "#ff0000";
+ static const char selbgcolor[]      = "#005577";
+ static const char selfgcolor[]      = "#eeeeee";
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+@@ -22,12 +22,17 @@ static const Rule rules[] = {
+ 	 *	WM_NAME(STRING) = title
+ 	 */
+ 	/* class      instance    title       tags mask     isfloating   monitor */
+-	{ "Gimp",     NULL,       NULL,       0,            True,        -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       False,       -1 },
++	{ "Firefox",  NULL,       NULL,       0,            False,       -1 },
++	{ "Pidgin",   NULL,       NULL,       0,            True,        -1 },
++	{ "Skype",    NULL,       NULL,       0,            True,        -1 },
++	{ "Kio_uiserver", NULL,   NULL,       0,            True,        -1 },
++	{ "Xchat",    NULL,       NULL,       1,            True,        -1 },
++	{ "Hexchat",  NULL,       NULL,       1,            True,        -1 },
++	{ "Jitsi",    NULL,       NULL,       1,            True,        -1 },
+ };
+ 
+ /* layout(s) */
+-static const float mfact      = 0.55; /* factor of master area size [0.05..0.95] */
++static const float mfact      = 0.65; /* factor of master area size [0.05..0.95] */
+ static const int nmaster      = 1;    /* number of clients in master area */
+ static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
+ 
+@@ -39,7 +44,7 @@ static const Layout layouts[] = {
+ };
+ 
+ /* key definitions */
+-#define MODKEY Mod1Mask
++#define MODKEY Mod4Mask
+ #define TAGKEYS(KEY,TAG) \
+ 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+ 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+@@ -52,7 +57,7 @@ static const Layout layouts[] = {
+ /* commands */
+ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+-static const char *termcmd[]  = { "st", NULL };
++static const char *termcmd[]  = { "x-terminal-emulator", NULL };
+ 
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+@@ -71,7 +76,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+-	{ MODKEY,                       XK_space,  setlayout,      {0} },
++	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+ 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
+ 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },

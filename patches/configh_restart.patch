@@ -1,0 +1,12 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -95,6 +95,7 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_7,                      6)
+ 	TAGKEYS(                        XK_8,                      7)
+ 	TAGKEYS(                        XK_9,                      8)
++	{ MODKEY,                       XK_q,      quit,           {1} },
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+ };
+ 

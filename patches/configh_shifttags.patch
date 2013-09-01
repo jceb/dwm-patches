@@ -1,0 +1,24 @@
+# HG changeset patch
+# Parent 8b11d67b9b0edbdf269320bf5d086031fb9209c4
+
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -70,6 +70,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "zoomswap.c"
+ #include "push.c"
+ #include "focusmaster.c"
++#include "shifttags.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -138,6 +139,8 @@ static Key keys[] = {
+ 	{ MODKEY|ShiftMask,             XK_s,      moveresize,     {.v = "0x 0y 0w 10h" } },
+ 	{ MODKEY|ShiftMask,             XK_w,      moveresize,     {.v = "0x 0y 0w -10h" } },
+ 	{ MODKEY|ControlMask,           XK_Return, focusmaster,    {0} },
++	{ MODKEY,                       XK_Left,   shifttags,      {.i = -1} },
++	{ MODKEY,                       XK_Right,  shifttags,      {.i = +1} },
+ };
+ 
+ /* button definitions */

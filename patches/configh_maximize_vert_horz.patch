@@ -1,0 +1,24 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -62,6 +62,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "toggleview_focus.c"
+ #include "moveresize.c"
+ #include "tagall.c"
++#include "maximize.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -99,6 +100,11 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY,                       XK_q,      quit,           {1} },
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY|ControlMask,           XK_l,      togglehorizontalmax, {0} },
++	{ MODKEY|ControlMask,           XK_h,      togglehorizontalmax, {0} },
++	{ MODKEY|ControlMask,           XK_j,      toggleverticalmax,   {0} },
++	{ MODKEY|ControlMask,           XK_k,      toggleverticalmax,   {0} },
++	{ MODKEY|ControlMask,           XK_m,      togglemaximize,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_F1,     tagall,         {.v = "F1" } },
+ 	{ MODKEY|ShiftMask,             XK_F2,     tagall,         {.v = "F2" } },
+ 	{ MODKEY|ShiftMask,             XK_F3,     tagall,         {.v = "F3" } },

@@ -1,0 +1,35 @@
+personal_configh.patch -p0 -p0 #+personal_configh
+toggleview_focus_client.patch -p0
+#disable_focus_stealing.patch -p0 #+disabled
+#single_tagset.patch -p0 #+broken
+configh_restart.patch -p0 #+personal_configh
+restart.patch -p0
+configh_moveresize.patch -p0 #+personal_configh
+moveresize.patch -p0
+#raiselower.patch -p0 #+broken
+#configh_raiselower.patch -p0 #+broken
+save_floats.patch -p0
+configh_tagall.patch -p0 #+personal_configh
+tagall.patch -p0
+configh_maximize_vert_horz.patch -p0 #+personal_configh
+maximize_vert_horz.patch -p0
+float_border_color2.patch -p0
+configh_float_border_color2.patch -p0 #+personal_configh
+swapfocus.patch -p0
+configh_swapfocus.patch -p0 #+personal_configh
+zoomswap.patch -p0
+configh_zoomswap.patch -p0 #+personal_configh
+gaplessgrid.patch -p0
+configh_gaplesssgrid.patch -p0 #+personal_configh
+pertag.patch -p0
+single_window_no_border.patch -p0
+attachabove.patch -p0
+configh_push.patch -p0 #+personal_configh
+push.patch -p0
+statusallmons.patch -p0
+configh_focusmaster.patch -p0 #+personal_configh
+focusmaster.patch -p0
+configh_shifttags.patch -p0 #+personal_configh
+shifttags.patch -p0
+single_tagset_all.patch -p0
+systray.patch -p0

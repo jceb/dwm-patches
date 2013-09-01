@@ -1,0 +1,28 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: no URL yet
+Prevents new windows from stealing the focus.
+Known issue: When starting/restarting dwm, the first window that is managed by
+dwm receives the focus.  All following windows that are even put in the master
+area, are not focussed!
+
+diff -r b60223e90a5e dwm.c
+--- a/dwm.c	Sat Apr 13 13:00:51 2013 +0200
++++ b/dwm.c	Wed May 22 20:13:36 2013 +0200
+@@ -1168,12 +1168,13 @@
+ 	                (unsigned char *) &(c->win), 1);
+ 	XMoveResizeWindow(dpy, c->win, c->x + 2 * sw, c->y, c->w, c->h); /* some windows require this */
+ 	setclientstate(c, NormalState);
+-	if (c->mon == selmon)
+-		unfocus(selmon->sel, False);
+-	c->mon->sel = c;
++	t = selmon->sel;
++	if(c->mon != selmon || !selmon->sel)
++		c->mon->sel = c;
+ 	arrange(c->mon);
+ 	XMapWindow(dpy, c->win);
+-	focus(NULL);
++	if(!t)
++		focus(NULL);
+ }
+ 
+ void

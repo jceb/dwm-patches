@@ -1,0 +1,40 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -60,6 +60,7 @@ static const char *dmenucmd[] = { "dmenu
+ static const char *termcmd[]  = { "x-terminal-emulator", NULL };
+ 
+ #include "toggleview_focus.c"
++#include "moveresize.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -68,7 +69,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+ 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
++	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+ 	{ MODKEY,                       XK_Return, zoom,           {0} },
+@@ -97,6 +98,18 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY,                       XK_q,      quit,           {1} },
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY,                       XK_a,      moveresize,     {.v = "-10x 0y 0w 0h" } },
++	{ MODKEY,                       XK_d,      moveresize,     {.v = "10x 0y 0w 0h" } },
++	{ MODKEY,                       XK_s,      moveresize,     {.v = "0x 10y 0w 0h" } },
++	{ MODKEY,                       XK_w,      moveresize,     {.v = "0x -10y 0w 0h" } },
++	{ MODKEY|ControlMask,           XK_a,      moveresize,     {.v = "0X 0y 0w 0h" } },
++	{ MODKEY|ControlMask,           XK_d,      moveresize,     {.v = "9000X 0y 0w 0h" } },
++	{ MODKEY|ControlMask,           XK_s,      moveresize,     {.v = "0x 9000Y 0w 0h" } },
++	{ MODKEY|ControlMask,           XK_w,      moveresize,     {.v = "0x 15Y 0w 0h" } },
++	{ MODKEY|ShiftMask,             XK_a,      moveresize,     {.v = "0x 0y -10w 0h" } },
++	{ MODKEY|ShiftMask,             XK_d,      moveresize,     {.v = "0x 0y 10w 0h" } },
++	{ MODKEY|ShiftMask,             XK_s,      moveresize,     {.v = "0x 0y 0w 10h" } },
++	{ MODKEY|ShiftMask,             XK_w,      moveresize,     {.v = "0x 0y 0w -10h" } },
+ };
+ 
+ /* button definitions */

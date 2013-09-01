@@ -1,0 +1,24 @@
+# HG changeset patch
+# Parent d672d038fcf77c556958402234561c03a39b4369
+
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -68,6 +68,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "tagall.c"
+ #include "maximize.c"
+ #include "zoomswap.c"
++#include "push.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -75,6 +76,8 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+ 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+ 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
++	{ MODKEY|ShiftMask,             XK_j,      pushdown,       {0} },
++	{ MODKEY|ShiftMask,             XK_k,      pushup,         {0} },
+ 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+ 	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },

@@ -1,0 +1,28 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm.orig/config.def.h
++++ dwm/config.def.h
+@@ -61,6 +61,7 @@ static const char *termcmd[]  = { "x-ter
+ 
+ #include "toggleview_focus.c"
+ #include "moveresize.c"
++#include "tagall.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -98,6 +99,15 @@ static Key keys[] = {
+ 	TAGKEYS(                        XK_9,                      8)
+ 	{ MODKEY,                       XK_q,      quit,           {1} },
+ 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
++	{ MODKEY|ShiftMask,             XK_F1,     tagall,         {.v = "F1" } },
++	{ MODKEY|ShiftMask,             XK_F2,     tagall,         {.v = "F2" } },
++	{ MODKEY|ShiftMask,             XK_F3,     tagall,         {.v = "F3" } },
++	{ MODKEY|ShiftMask,             XK_F4,     tagall,         {.v = "F4" } },
++	{ MODKEY|ShiftMask,             XK_F5,     tagall,         {.v = "F5" } },
++	{ MODKEY|ShiftMask,             XK_F6,     tagall,         {.v = "F6" } },
++	{ MODKEY|ShiftMask,             XK_F7,     tagall,         {.v = "F7" } },
++	{ MODKEY|ShiftMask,             XK_F8,     tagall,         {.v = "F8" } },
++	{ MODKEY|ShiftMask,             XK_F9,     tagall,         {.v = "F9" } },
+ 	{ MODKEY,                       XK_a,      moveresize,     {.v = "-10x 0y 0w 0h" } },
+ 	{ MODKEY,                       XK_d,      moveresize,     {.v = "10x 0y 0w 0h" } },
+ 	{ MODKEY,                       XK_s,      moveresize,     {.v = "0x 10y 0w 0h" } },
