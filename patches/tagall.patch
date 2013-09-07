@@ -1,3 +1,7 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: http://dwm.suckless.org/patches/historical/tagall
+Shortcut to move all (floating) windows from one tag to another.
+
 --- dwm.orig//dev/null	Thu Jan 01 00:00:00 1970 +0000
 +++ dwm/tagall.c	Sat Feb 11 22:39:15 2012 +0100
 @@ -0,0 +1,24 @@

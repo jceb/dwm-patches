@@ -1,3 +1,7 @@
+Author: Unknown (extended by Jan Christoph Ebersbach <jceb@e-jc.de)
+URL: no URL yet
+Shift tags, e.g. cycle through tags.
+
 --- dwm.orig//dev/null	Thu Jan 01 00:00:00 1970 +0000
 +++ dwm/shifttags.c	Tue Aug 07 07:57:53 2012 +0200
 @@ -0,0 +1,28 @@

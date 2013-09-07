@@ -1,5 +1,6 @@
-# HG changeset patch
-# Parent c794a9f5ae5eee168e8995c31e0dcad46a764ef9
+Author: unknown
+URL: no URL yet
+Add functionality to restart dwm.
 
 Index: dwm/dwm.c
 ===================================================================
