@@ -1,24 +1,25 @@
 Installation
 ------------
 
-# activate mercurial patch stack
-$ cat >> ~/.hgrc
-[extensions]
-mq =
-
 # clone patches repository including the dwm repository
-$ hg qclone hg qclone https://bitbucket.org/jceb81/dwm-patches
+$ git clone https://github.com/jceb/dwm-patches
+
+# init and load dwm submodule
+$ cd dwm-patches
+$ git submodule init dwm
+$ git submodule upload dwm
 
 # activate all patches, including the personal configuration
-$ hg qpush -a
+$ quilt push -a
 
-# build dwm
+# build dwm (or us the ./build script)
+$ cd dwm
+$ rm -f config.h
 $ make
 
 Patch References
 ----------------
 attachabove.patch             - http://dwm.suckless.org/patches/attachabove
-disable_focus_stealing.patch  - no URL yet
 float_border_color2.patch     - http://dwm.suckless.org/patches/historical/float_border_color
 focusmaster.patch             - no URL yet
 gaplessgrid.patch             - http://dwm.suckless.org/patches/gapless_grid
@@ -40,4 +41,5 @@ zoomswap.patch                - http://dwm.suckless.org/patches/zoomswap
 
 Not maintained
 --------------
-raiselower.patch          - http://dwm.suckless.org/patches/historical/raiselower
+disable_focus_stealing.patch  - no URL yet
+raiselower.patch              - http://dwm.suckless.org/patches/historical/raiselower

@@ -1,0 +1,2 @@
+#!/bin/sh
+./build && sudo rm /usr/bin/dwm && sudo cp dwm/dwm /usr/bin/dwm && sudo chown 755 /usr/bin/dwm
