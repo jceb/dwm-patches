@@ -4,7 +4,7 @@ Implements a system tray for dwm.
 
 Index: dwm/config.def.h
 ===================================================================
---- dwm.orig/config.def.h
+--- dwm/config.def.h.orig
 +++ dwm/config.def.h
 @@ -12,6 +12,10 @@ static const char floatnormbordercolor[]
  static const char floatselbordercolor[]  = "#ff0000";
@@ -19,7 +19,7 @@ Index: dwm/config.def.h
  
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -56,12 +56,30 @@
  #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
@@ -475,8 +475,8 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1715,6 +1893,22 @@ swapfocus(){
- 		focus(prevclient);
+@@ -1717,6 +1895,22 @@ swapfocus(){
+ 	}
  }
  
 +Monitor *
@@ -498,7 +498,7 @@ Index: dwm/dwm.c
  void
  tag(const Arg *arg) {
  	Monitor *m;
-@@ -1795,7 +1989,18 @@ void
+@@ -1797,7 +1991,18 @@ void
  togglebar(const Arg *arg) {
  	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
  	updatebarpos(selmon);
@@ -518,7 +518,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1935,11 +2140,18 @@ unmapnotify(XEvent *e) {
+@@ -1937,11 +2142,18 @@ unmapnotify(XEvent *e) {
  		else
  			unmanage(c, False);
  	}
@@ -537,7 +537,7 @@ Index: dwm/dwm.c
  	XSetWindowAttributes wa = {
  		.override_redirect = True,
  		.background_pixmap = ParentRelative,
-@@ -1948,10 +2160,15 @@ updatebars(void) {
+@@ -1950,10 +2162,15 @@ updatebars(void) {
  	for(m = mons; m; m = m->next) {
  		if (m->barwin)
  			continue;
@@ -554,7 +554,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2145,6 +2362,110 @@ updatestatus(void) {
+@@ -2147,6 +2364,110 @@ updatestatus(void) {
  }
  
  void
@@ -665,7 +665,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2255,6 +2576,16 @@ wintomon(Window w) {
+@@ -2257,6 +2578,16 @@ wintomon(Window w) {
  	return selmon;
  }
  

@@ -6,7 +6,7 @@ last used window.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -206,6 +206,7 @@ static void setup(void);
  static void showhide(Client *c);
@@ -24,22 +24,24 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -1604,6 +1606,14 @@ spawn(const Arg *arg) {
+@@ -1604,6 +1606,16 @@ spawn(const Arg *arg) {
  }
  
  void
 +swapfocus(){
 +	Client *c;
 +	for(c = selmon->clients; c && c != prevclient; c = c->next) ;
-+	if(c == prevclient)
++	if(c == prevclient) {
 +		focus(prevclient);
++		restack(prevclient->mon);
++	}
 +}
 +
 +void
  tag(const Arg *arg) {
  	if(selmon->sel && arg->ui & TAGMASK) {
  		selmon->sel->tags = arg->ui & TAGMASK;
-@@ -1707,6 +1717,7 @@ void
+@@ -1707,6 +1719,7 @@ void
  unfocus(Client *c, Bool setfocus) {
  	if(!c)
  		return;
@@ -47,7 +49,7 @@ Index: dwm/dwm.c
  	grabbuttons(c, False);
  	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->rgb);
  	if(setfocus) {
-@@ -2065,12 +2076,13 @@ xerrorstart(Display *dpy, XErrorEvent *e
+@@ -2065,12 +2078,13 @@ xerrorstart(Display *dpy, XErrorEvent *e
  void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;

@@ -5,7 +5,7 @@ always becoming the new master) – basically how Xmonad does it.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -149,6 +149,7 @@ static Bool applysizehints(Client *c, in
  static void arrange(Monitor *m);
@@ -53,7 +53,7 @@ Index: dwm/dwm.c
  	attachstack(c);
  	focus(NULL);
  	arrange(NULL);
-@@ -1952,7 +1966,7 @@ updategeom(void) {
+@@ -1954,7 +1968,7 @@ updategeom(void) {
  					m->clients = c->next;
  					detachstack(c);
  					c->mon = mons;

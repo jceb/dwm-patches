@@ -4,7 +4,7 @@ This patch swaps the current window with the previous master when zooming.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -237,6 +237,7 @@ static void zoom(const Arg *arg);
  
@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2077,14 +2078,38 @@ void
+@@ -2079,14 +2080,38 @@ void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;
  	prevclient = nexttiled(selmon->clients);

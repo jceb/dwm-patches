@@ -5,7 +5,7 @@ monocle layout.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -1141,7 +1141,7 @@ maprequest(XEvent *e) {
  
@@ -36,7 +36,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1668,7 +1677,7 @@ tagmon(const Arg *arg) {
+@@ -1670,7 +1679,7 @@ tagmon(const Arg *arg) {
  
  void
  tile(Monitor *m) {
@@ -45,7 +45,7 @@ Index: dwm/dwm.c
  	Client *c;
  
  	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-@@ -1679,17 +1688,36 @@ tile(Monitor *m) {
+@@ -1681,17 +1690,36 @@ tile(Monitor *m) {
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
@@ -83,7 +83,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1711,10 +1739,16 @@ togglefloating(const Arg *arg) {
+@@ -1713,10 +1741,16 @@ togglefloating(const Arg *arg) {
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].floatborder->rgb);
  	else
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].border->rgb);
