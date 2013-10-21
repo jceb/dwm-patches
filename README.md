@@ -26,6 +26,7 @@
 * [float_border_color2.patch](patches/float_border_color2.patch)         (http://dwm.suckless.org/patches/historical/float_border_color)
 * [focusmaster.patch](patches/focusmaster.patch)                         (no URL yet)
 * [gaplessgrid.patch](patches/gaplessgrid.patch)                         (http://dwm.suckless.org/patches/gapless_grid)
+* [keepfloatingposition.patch](patches/keepfloatingposition.patch)       (no URL yet)
 * [maximize_vert_horz.patch](patches/maximize_vert_horz.patch)           (http://dwm.suckless.org/patches/historical/moveresize)
 * [moveresize.patch](patches/moveresize.patch)                           (http://dwm.suckless.org/patches/historical/moveresize)
 * [pertag.patch](patches/pertag.patch)                                   (http://dwm.suckless.org/patches/pertag)
