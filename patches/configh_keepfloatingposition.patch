@@ -1,7 +1,7 @@
 Index: dwm/dwm/config.def.h
 ===================================================================
---- dwm.orig/dwm/config.def.h	2013-10-21 08:51:46.690960758 +0200
-+++ dwm/dwm/config.def.h	2013-10-21 08:52:25.026961814 +0200
+--- dwm.orig/dwm/config.def.h	2013-10-21 08:55:59.934967732 +0200
++++ dwm/dwm/config.def.h	2013-10-21 18:58:23.000000000 +0200
 @@ -71,6 +71,7 @@
  #include "push.c"
  #include "focusmaster.c"

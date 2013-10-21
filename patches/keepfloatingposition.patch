@@ -1,7 +1,13 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: no URL yet
+This patch is an addition to the single_tagset patch.  It keeps the position of
+a floating client when it's moved to another monitor.  This applies also and
+especially to tags that are displayed on another monitor.
+
 Index: dwm/dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm/dwm.c	2013-10-21 07:55:24.302524621 +0200
-+++ dwm/dwm/dwm.c	2013-10-21 08:50:40.000000000 +0200
+--- dwm.orig/dwm/dwm.c	2013-10-21 08:55:59.894967731 +0200
++++ dwm/dwm/dwm.c	2013-10-21 18:58:23.000000000 +0200
 @@ -1676,6 +1676,8 @@
  	if(ISVISIBLE(c, c->mon)) { /* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
@@ -14,8 +20,8 @@ Index: dwm/dwm/dwm.c
 Index: dwm/dwm/keepfloatingposition.c
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ dwm/dwm/keepfloatingposition.c	2013-10-21 08:49:19.630956709 +0200
-@@ -0,0 +1,30 @@
++++ dwm/dwm/keepfloatingposition.c	2013-10-21 18:55:51.351005702 +0200
+@@ -0,0 +1,36 @@
 +static void
 +keepfloatingposition(Client *c) {
 +	Monitor *m;
@@ -24,25 +30,31 @@ Index: dwm/dwm/keepfloatingposition.c
 +	int cmmw = c->mon->mw;
 +	int cmmh = c->mon->mh;
 +	int mmx, mmy;
++	FILE *x = fopen("/tmp/x", "w");
++	fprintf(x, "mon mx: %d, my: %d, mw: %d, mh: %d\n", c->mon->mx, c->mon->my, c->mon->mw, c->mon->mh);
++	fprintf(x, "start x: %d, y: %d, w: %d, h: %d\n", c->x, c->y, c->w, c->h);
 +	if(!(cmmx <= c->x &&
-+			cmmx + cmmw >= c->x &&
++			cmmx + cmmw - 1 >= c->x &&
 +			cmmy <= c->y &&
-+			cmmy + cmmh >= c->y))
++			cmmy + cmmh - 1 >= c->y))
 +		for(m = mons; m; m = m->next) {
 +			mmx = m->mx;
 +			mmy = m->my;
 +			if(mmx <= c->x &&
-+					mmx + m->mw >= c->x &&
++					mmx + m->mw - 1 >= c->x &&
 +					mmy <= c->y &&
-+					mmy + m->mh >= c->y) {
++					mmy + m->mh - 1 >= c->y) {
++				fprintf(x, "resize\n");
 +				c->x = c->x - mmx + cmmx;
 +				c->y = c->y - mmy + cmmy;
-+				if(c->x + c->w  + c->bw > cmmx + cmmw)
++				if(c->x + c->w  + 2 * c->bw > cmmx + cmmw - 1)
 +					c->x -= c->x + c->w + 2 * c->bw - cmmx - cmmw;
-+				if(c->y + c->h + c->bw > cmmy + cmmh)
++				if(c->y + c->h + 2 * c->bw > cmmy + cmmh - 1)
 +					c->y -= c->y + c->h + 2 * c->bw - cmmy - cmmh;
 +				resizeclient(c, c->x, c->y, c->w, c->h);
 +				break;
 +			}
 +		}
++	fprintf(x, "end x: %d, y: %d, w: %d, h: %d\n", c->x, c->y, c->w, c->h);
++	fclose(x);
 +}
