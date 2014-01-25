@@ -3,8 +3,7 @@ URL: http://dwm.suckless.org/patches/pertag
 This patch keeps layout, mwfact, barpos and nmaster per tag.
 
 Contributors:
-- Carlos Pita, thanks for debugging some multi monitor issues and sending a
-  patch
+- Carlos Pita, thanks for debugging NetActiveWindow issues and sending a patch
 
 Index: dwm/dwm.c
 ===================================================================
