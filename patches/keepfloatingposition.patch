@@ -6,9 +6,9 @@ especially to tags that are displayed on another monitor.
 
 Index: dwm/dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm/dwm.c	2013-10-21 19:10:09.711029338 +0200
-+++ dwm/dwm/dwm.c	2013-10-21 19:19:06.000000000 +0200
-@@ -1676,6 +1676,8 @@
+--- dwm.orig/dwm/dwm.c	2014-01-25 21:32:34.834301368 +0100
++++ dwm/dwm/dwm.c	2014-01-25 21:32:34.826301368 +0100
+@@ -1679,6 +1679,8 @@
  	if(ISVISIBLE(c, c->mon)) { /* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
@@ -20,7 +20,7 @@ Index: dwm/dwm/dwm.c
 Index: dwm/dwm/keepfloatingposition.c
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ dwm/dwm/keepfloatingposition.c	2013-10-21 19:19:28.271044720 +0200
++++ dwm/dwm/keepfloatingposition.c	2014-01-25 21:32:34.826301368 +0100
 @@ -0,0 +1,30 @@
 +static void
 +keepfloatingposition(Client *c) {
