@@ -2,10 +2,14 @@ Author: Jan Christoph Ebersbach <jceb@e-jc.de>, inspired by http://code.google.c
 URL: http://dwm.suckless.org/patches/systray
 Implements a system tray for dwm.
 
+Contributors:
+- Carlos Pita, thanks for investigating multi monitor issues and sending in a
+  patch
+
 Index: dwm/config.def.h
 ===================================================================
---- dwm/config.def.h.orig	2014-01-25 21:13:25.878343910 +0100
-+++ dwm/config.def.h	2014-01-25 21:13:25.870343910 +0100
+--- dwm/config.def.h.orig	2014-01-25 21:24:35.202319127 +0100
++++ dwm/config.def.h	2014-01-25 21:24:35.190319127 +0100
 @@ -12,6 +12,10 @@
  static const char floatselbordercolor[]  = "#ff0000";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -19,8 +23,8 @@ Index: dwm/config.def.h
  
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig	2014-01-25 21:13:25.878343910 +0100
-+++ dwm/dwm.c	2014-01-25 21:14:31.646341475 +0100
+--- dwm/dwm.c.orig	2014-01-25 21:24:35.202319127 +0100
++++ dwm/dwm.c	2014-01-25 21:31:32.574303673 +0100
 @@ -56,12 +56,30 @@
  #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
  #define TEXTW(X)                (drw_font_getexts_width(drw->font, X, strlen(X)) + drw->font->h)
@@ -555,7 +559,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2152,6 +2369,110 @@
+@@ -2152,6 +2369,114 @@
  }
  
  void
@@ -610,6 +614,7 @@ Index: dwm/dwm.c
 +void
 +updatesystray(void) {
 +	XSetWindowAttributes wa;
++	XWindowChanges wc;
 +	Client *i;
 +	Monitor *m = systraytomon(NULL);
 +	unsigned int x = m->mx + m->mw;
@@ -646,7 +651,6 @@ Index: dwm/dwm.c
 +		/* make sure the background color stays the same */
 +		wa.background_pixel  = scheme[SchemeNorm].bg->rgb;
 +		XChangeWindowAttributes(dpy, i->win, CWBackPixel, &wa);
-+		XMapRaised(dpy, i->win);
 +		w += systrayspacing;
 +		XMoveResizeWindow(dpy, i->win, (i->x = w), 0, i->w, i->h);
 +		w += i->w;
@@ -655,7 +659,11 @@ Index: dwm/dwm.c
 +	}
 +	w = w ? w + systrayspacing : 1;
 + 	x -= w;
-+	XMoveResizeWindow(dpy, systray->win, x, m->by, w, bh);
++	wc.x = x; wc.y = m->by; wc.width = w; wc.height = bh;
++	wc.stack_mode = Above; wc.sibling = m->barwin;
++	XConfigureWindow(dpy, systray->win, CWX|CWY|CWWidth|CWHeight|CWSibling|CWStackMode, &wc);
++	XMapWindow(dpy, systray->win);
++	XMapSubwindows(dpy, systray->win);
 +	/* redraw background */
 +	XSetForeground(dpy, drw->gc, scheme[SchemeNorm].bg->rgb);
 +	XFillRectangle(dpy, systray->win, drw->gc, 0, 0, w, bh);
@@ -666,7 +674,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2262,6 +2583,16 @@
+@@ -2262,6 +2587,16 @@
  	return selmon;
  }
  
