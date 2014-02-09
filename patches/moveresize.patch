@@ -3,8 +3,10 @@ URL: http://dwm.suckless.org/patches/historical/moveresize
 These patches provide helper functions for moving and resizing floating windows
 using keybindings.
 
---- dwm.orig//dev/null	Thu Jan 01 00:00:00 1970 +0000
-+++ dwm/moveresize.c	Sat Feb 11 23:53:49 2012 +0100
+Index: dwm/moveresize.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ dwm/moveresize.c	2014-02-09 15:24:09.244116888 +0100
 @@ -0,0 +1,64 @@
 +void
 +moveresize(const Arg *arg) {

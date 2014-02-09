@@ -4,9 +4,9 @@ Add functionality to restart dwm.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
-+++ dwm/dwm.c
-@@ -259,6 +259,7 @@ static void (*handler[LASTEvent]) (XEven
+--- dwm/dwm.c.orig	2014-02-09 15:24:08.148116858 +0100
++++ dwm/dwm.c	2014-02-09 15:24:08.140116858 +0100
+@@ -259,6 +259,7 @@
  };
  static Atom wmatom[WMLast], netatom[NetLast];
  static Bool running = True;
@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static Cur *cursor[CurLast];
  static ClrScheme scheme[SchemeLast];
  static Display *dpy;
-@@ -1226,6 +1227,8 @@ propertynotify(XEvent *e) {
+@@ -1226,6 +1227,8 @@
  
  void
  quit(const Arg *arg) {
@@ -23,7 +23,7 @@ Index: dwm/dwm.c
  	running = False;
  }
  
-@@ -2057,6 +2060,8 @@ main(int argc, char *argv[]) {
+@@ -2057,6 +2060,8 @@
  	setup();
  	scan();
  	run();

@@ -3,9 +3,9 @@ This patch draws and updates the statusbar on all monitors.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig	2014-01-25 21:32:24.814301739 +0100
-+++ dwm/dwm.c	2014-01-25 21:32:24.806301739 +0100
-@@ -770,17 +770,13 @@
+--- dwm/dwm.c.orig	2014-02-09 15:24:22.768117261 +0100
++++ dwm/dwm.c	2014-02-09 15:24:22.764117260 +0100
+@@ -715,17 +715,13 @@
  	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
  	x += w;
  	xx = x;
@@ -29,7 +29,7 @@ Index: dwm/dwm.c
  	if((w = x - xx) > bh) {
  		x = xx;
  		if(m->sel) {
-@@ -2076,9 +2072,11 @@
+@@ -1923,9 +1919,11 @@
  
  void
  updatestatus(void) {

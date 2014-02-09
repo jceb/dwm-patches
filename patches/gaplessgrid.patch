@@ -1,8 +1,10 @@
 URL: http://dwm.suckless.org/patches/gapless_grid
 Add gapless grid layout.
 
---- dwm.orig//dev/null	Thu Jan 01 00:00:00 1970 +0000
-+++ dwm/gaplessgrid.c	Wed May 22 20:42:26 2013 +0200
+Index: dwm/gaplessgrid.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ dwm/gaplessgrid.c	2014-02-09 15:24:17.132117105 +0100
 @@ -0,0 +1,35 @@
 +void
 +gaplessgrid(Monitor *m) {

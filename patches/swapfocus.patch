@@ -6,9 +6,9 @@ last used window.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig
-+++ dwm/dwm.c
-@@ -206,6 +206,7 @@ static void setup(void);
+--- dwm/dwm.c.orig	2014-02-09 15:24:14.868117043 +0100
++++ dwm/dwm.c	2014-02-09 15:24:14.864117043 +0100
+@@ -205,6 +205,7 @@
  static void showhide(Client *c);
  static void sigchld(int unused);
  static void spawn(const Arg *arg);
@@ -16,7 +16,7 @@ Index: dwm/dwm.c
  static void tag(const Arg *arg);
  static void tagmon(const Arg *arg);
  static void tile(Monitor *);
-@@ -235,6 +236,7 @@ static int xerrorstart(Display *dpy, XEr
+@@ -234,6 +235,7 @@
  static void zoom(const Arg *arg);
  
  /* variables */
@@ -24,7 +24,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -1604,6 +1606,16 @@ spawn(const Arg *arg) {
+@@ -1584,6 +1586,16 @@
  }
  
  void
@@ -41,7 +41,7 @@ Index: dwm/dwm.c
  tag(const Arg *arg) {
  	if(selmon->sel && arg->ui & TAGMASK) {
  		selmon->sel->tags = arg->ui & TAGMASK;
-@@ -1707,6 +1719,7 @@ void
+@@ -1675,6 +1687,7 @@
  unfocus(Client *c, Bool setfocus) {
  	if(!c)
  		return;
@@ -49,7 +49,7 @@ Index: dwm/dwm.c
  	grabbuttons(c, False);
  	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->rgb);
  	if(setfocus) {
-@@ -2065,12 +2078,13 @@ xerrorstart(Display *dpy, XErrorEvent *e
+@@ -2033,12 +2046,13 @@
  void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;

@@ -5,9 +5,9 @@ using keybindings.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
-+++ dwm/dwm.c
-@@ -92,7 +92,7 @@ struct Client {
+--- dwm/dwm.c.orig	2014-02-09 15:24:12.552116979 +0100
++++ dwm/dwm.c	2014-02-09 15:24:12.548116979 +0100
+@@ -91,7 +91,7 @@
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
  	unsigned int tags;
@@ -16,8 +16,8 @@ Index: dwm/dwm.c
  	Client *next;
  	Client *snext;
  	Monitor *mon;
-@@ -1053,6 +1053,8 @@ manage(Window w, XWindowAttributes *wa)
- 	c->sfh = c->h;
+@@ -1047,6 +1047,8 @@
+ 	updatewmhints(c);
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, False);
 +	c->wasfloating = False;
@@ -27,8 +27,8 @@ Index: dwm/dwm.c
  	if(c->isfloating)
 Index: dwm/maximize.c
 ===================================================================
---- /dev/null
-+++ dwm/maximize.c
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ dwm/maximize.c	2014-02-09 15:24:12.548116979 +0100
 @@ -0,0 +1,45 @@
 +void
 +maximize(int x, int y, int w, int h) {

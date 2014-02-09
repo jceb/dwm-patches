@@ -4,27 +4,27 @@ This patch swaps the current window with the previous master when zooming.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig	2014-02-09 09:40:58.702677271 +0100
-+++ dwm/dwm.c	2014-02-09 09:40:58.694677271 +0100
-@@ -237,6 +237,7 @@
+--- dwm/dwm.c.orig	2014-02-09 15:24:16.008117074 +0100
++++ dwm/dwm.c	2014-02-09 15:24:16.000117074 +0100
+@@ -234,6 +234,7 @@
+ static void zoom(const Arg *arg);
  
  /* variables */
- static Client *prevclient = NULL;
 +static Client *prevzoom = NULL;
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2079,14 +2080,38 @@
+@@ -2033,14 +2034,38 @@
+ void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;
- 	prevclient = nexttiled(selmon->clients);
 +	Client *at = NULL, *cold, *cprevious = NULL;
  
  	if(!selmon->lt[selmon->sellt]->arrange
  	|| (selmon->sel && selmon->sel->isfloating))
  		return;
 -	if(c == nexttiled(selmon->clients))
--		if(!c || !(c = prevclient = nexttiled(c->next)))
+-		if(!c || !(c = nexttiled(c->next)))
 -			return;
 -	pop(c);
 +	if(c == nexttiled(selmon->clients)) {
@@ -33,7 +33,7 @@ Index: dwm/dwm.c
 +			cprevious = nexttiled(at->next);
 +		if(!cprevious || cprevious != prevzoom) {
 +			prevzoom = NULL;
-+			if(!c || !(c = prevclient = nexttiled(c->next)))
++			if(!c || !(c = nexttiled(c->next)))
 +				return;
 +		} else
 +			c = cprevious;
@@ -60,7 +60,7 @@ Index: dwm/dwm.c
 Index: dwm/zoomswap.c
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ dwm/zoomswap.c	2014-02-09 09:40:58.694677271 +0100
++++ dwm/zoomswap.c	2014-02-09 15:24:16.004117074 +0100
 @@ -0,0 +1,10 @@
 +static Client * findbefore(Client *c);
 +
@@ -74,12 +74,12 @@ Index: dwm/zoomswap.c
 +}
 Index: dwm/config.def.h
 ===================================================================
---- dwm/config.def.h.orig	2014-02-09 09:41:06.000000000 +0100
-+++ dwm/config.def.h	2014-02-09 09:41:42.342678473 +0100
-@@ -65,6 +65,7 @@
- #include "moveresize.c"
- #include "tagall.c"
- #include "maximize.c"
+--- dwm/config.def.h.orig	2014-02-09 15:24:16.008117074 +0100
++++ dwm/config.def.h	2014-02-09 15:24:16.004117074 +0100
+@@ -54,6 +54,7 @@
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+ static const char *termcmd[]  = { "st", NULL };
+ 
 +#include "zoomswap.c"
  static Key keys[] = {
  	/* modifier                     key        function        argument */
