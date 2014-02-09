@@ -18,7 +18,6 @@ configh_float_border_color2.patch -p0 #+personal_configh
 swapfocus.patch -p0
 configh_swapfocus.patch -p0 #+personal_configh
 zoomswap.patch -p0
-configh_zoomswap.patch -p0 #+personal_configh
 gaplessgrid.patch -p0
 configh_gaplesssgrid.patch -p0 #+personal_configh
 pertag.patch -p0
