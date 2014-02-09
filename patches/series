@@ -32,5 +32,4 @@ configh_shifttags.patch -p0 #+personal_configh
 shifttags.patch -p0
 single_tagset_all.patch -p0
 keepfloatingposition.patch
-configh_keepfloatingposition.patch #+personal_configh
 systray.patch -p0
