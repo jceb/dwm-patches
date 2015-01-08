@@ -5,9 +5,9 @@ always becoming the new master) – basically how Xmonad does it.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig	2014-01-25 21:32:19.978301918 +0100
-+++ dwm/dwm.c	2014-01-25 21:32:19.970301918 +0100
-@@ -149,6 +149,7 @@
+--- dwm/dwm.c.orig
++++ dwm/dwm.c
+@@ -149,6 +149,7 @@ static Bool applysizehints(Client *c, in
  static void arrange(Monitor *m);
  static void arrangemon(Monitor *m);
  static void attach(Client *c);
@@ -15,7 +15,7 @@ Index: dwm/dwm.c
  static void attachstack(Client *c);
  static void buttonpress(XEvent *e);
  static void checkotherwm(void);
-@@ -417,6 +418,19 @@
+@@ -417,6 +418,19 @@ attach(Client *c) {
  }
  
  void
@@ -35,7 +35,7 @@ Index: dwm/dwm.c
  attachstack(Client *c) {
  	c->snext = c->mon->stack;
  	c->mon->stack = c;
-@@ -1106,7 +1120,7 @@
+@@ -1106,7 +1120,7 @@ manage(Window w, XWindowAttributes *wa)
  		XRaiseWindow(dpy, c->win);
  	if(c->isfloating)
  		XSetWindowBorder(dpy, w, scheme[SchemeNorm].floatborder->rgb);
@@ -44,7 +44,7 @@ Index: dwm/dwm.c
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
  	                (unsigned char *) &(c->win), 1);
-@@ -1449,7 +1463,7 @@
+@@ -1458,7 +1472,7 @@ sendmon(Client *c, Monitor *m) {
  	detachstack(c);
  	c->mon = m;
  	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
@@ -53,7 +53,7 @@ Index: dwm/dwm.c
  	attachstack(c);
  	focus(NULL);
  	arrange(NULL);
-@@ -1957,7 +1971,7 @@
+@@ -1966,7 +1980,7 @@ updategeom(void) {
  					m->clients = c->next;
  					detachstack(c);
  					c->mon = mons;

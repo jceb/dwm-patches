@@ -4,11 +4,11 @@ This patch is an addition to the single_tagset patch.  It keeps the position of
 a floating client when it's moved to another monitor.  This applies also and
 especially to tags that are displayed on another monitor.
 
-Index: dwm/dwm/dwm.c
+Index: dwm-patches/dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm/dwm.c	2014-02-09 13:57:05.291973036 +0100
-+++ dwm/dwm/dwm.c	2014-02-09 13:57:05.283973035 +0100
-@@ -1679,6 +1679,8 @@
+--- dwm-patches.orig/dwm/dwm.c
++++ dwm-patches/dwm/dwm.c
+@@ -1688,6 +1688,8 @@ showhide(Client *c) {
  	if(ISVISIBLE(c, c->mon)) { /* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
@@ -17,10 +17,10 @@ Index: dwm/dwm/dwm.c
  			resize(c, c->x, c->y, c->w, c->h, False);
  		showhide(c->snext);
  	}
-Index: dwm/dwm/keepfloatingposition.c
+Index: dwm-patches/dwm/keepfloatingposition.c
 ===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ dwm/dwm/keepfloatingposition.c	2014-02-09 13:57:05.283973035 +0100
+--- /dev/null
++++ dwm-patches/dwm/keepfloatingposition.c
 @@ -0,0 +1,30 @@
 +static void
 +keepfloatingposition(Client *c) {
@@ -52,11 +52,11 @@ Index: dwm/dwm/keepfloatingposition.c
 +			}
 +		}
 +}
-Index: dwm/dwm/config.def.h
+Index: dwm-patches/dwm/config.def.h
 ===================================================================
---- dwm.orig/dwm/config.def.h	2014-02-09 13:57:27.255973640 +0100
-+++ dwm/dwm/config.def.h	2014-02-09 13:57:38.739973957 +0100
-@@ -71,6 +71,7 @@
+--- dwm-patches.orig/dwm/config.def.h
++++ dwm-patches/dwm/config.def.h
+@@ -71,6 +71,7 @@ static const char *termcmd[]  = { "x-ter
  #include "push.c"
  #include "focusmaster.c"
  #include "shifttags.c"

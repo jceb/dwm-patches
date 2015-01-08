@@ -5,7 +5,7 @@ be restored.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
 @@ -87,6 +87,7 @@ struct Client {
  	char name[256];
@@ -26,7 +26,7 @@ Index: dwm/dwm.c
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, False);
  	if(!c->isfloating)
-@@ -1644,8 +1649,16 @@ togglefloating(const Arg *arg) {
+@@ -1653,8 +1658,16 @@ togglefloating(const Arg *arg) {
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if(selmon->sel->isfloating)

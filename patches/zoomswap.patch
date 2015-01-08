@@ -4,9 +4,9 @@ This patch swaps the current window with the previous master when zooming.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm/dwm.c.orig	2014-02-09 09:40:58.702677271 +0100
-+++ dwm/dwm.c	2014-02-09 09:40:58.694677271 +0100
-@@ -237,6 +237,7 @@
+--- dwm/dwm.c.orig
++++ dwm/dwm.c
+@@ -237,6 +237,7 @@ static void zoom(const Arg *arg);
  
  /* variables */
  static Client *prevclient = NULL;
@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2079,14 +2080,38 @@
+@@ -2088,14 +2089,38 @@ void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;
  	prevclient = nexttiled(selmon->clients);
@@ -59,8 +59,8 @@ Index: dwm/dwm.c
  int
 Index: dwm/zoomswap.c
 ===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ dwm/zoomswap.c	2014-02-09 09:40:58.694677271 +0100
+--- /dev/null
++++ dwm/zoomswap.c
 @@ -0,0 +1,10 @@
 +static Client * findbefore(Client *c);
 +
@@ -74,9 +74,9 @@ Index: dwm/zoomswap.c
 +}
 Index: dwm/config.def.h
 ===================================================================
---- dwm/config.def.h.orig	2014-02-09 09:41:06.000000000 +0100
-+++ dwm/config.def.h	2014-02-09 09:41:42.342678473 +0100
-@@ -65,6 +65,7 @@
+--- dwm/config.def.h.orig
++++ dwm/config.def.h
+@@ -65,6 +65,7 @@ static const char *termcmd[]  = { "x-ter
  #include "moveresize.c"
  #include "tagall.c"
  #include "maximize.c"

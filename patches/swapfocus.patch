@@ -24,7 +24,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -1604,6 +1606,16 @@ spawn(const Arg *arg) {
+@@ -1613,6 +1615,16 @@ spawn(const Arg *arg) {
  }
  
  void
@@ -41,7 +41,7 @@ Index: dwm/dwm.c
  tag(const Arg *arg) {
  	if(selmon->sel && arg->ui & TAGMASK) {
  		selmon->sel->tags = arg->ui & TAGMASK;
-@@ -1707,6 +1719,7 @@ void
+@@ -1716,6 +1728,7 @@ void
  unfocus(Client *c, Bool setfocus) {
  	if(!c)
  		return;
@@ -49,7 +49,7 @@ Index: dwm/dwm.c
  	grabbuttons(c, False);
  	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->rgb);
  	if(setfocus) {
-@@ -2065,12 +2078,13 @@ xerrorstart(Display *dpy, XErrorEvent *e
+@@ -2074,12 +2087,13 @@ xerrorstart(Display *dpy, XErrorEvent *e
  void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;
