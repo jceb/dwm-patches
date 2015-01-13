@@ -1,2 +1,2 @@
 #!/bin/sh
-cd dwm && rm -f config.h && make
+cd "$(dirname "$0")" && cd dwm && rm -f config.h && make
