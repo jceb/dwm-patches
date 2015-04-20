@@ -1,4 +1,7 @@
-Author: Jan Christoph Ebersbach <jceb@e-jc.de>, inspired by http://code.google.com/p/dwm-plus
+Authors:
+    Jan Christoph Ebersbach <jceb@e-jc.de>, inspired by http://code.google.com/p/dwm-plus
+    Eric Pruitt <eric.pruitt@gmail.com>
+    Yury Shvedov <shved@lvk.cs.msu.su>
 URL: http://dwm.suckless.org/patches/systray
 Implements a system tray for dwm.
 
@@ -158,7 +161,7 @@ Index: dwm/dwm.c
  	drw_cur_free(drw, cursor[CurNormal]);
  	drw_cur_free(drw, cursor[CurResize]);
  	drw_cur_free(drw, cursor[CurMove]);
-@@ -585,10 +627,50 @@ clearurgent(Client *c) {
+@@ -585,10 +627,53 @@ clearurgent(Client *c) {
  
  void
  clientmessage(XEvent *e) {
@@ -173,7 +176,10 @@ Index: dwm/dwm.c
 +		if(cme->data.l[1] == SYSTEM_TRAY_REQUEST_DOCK) {
 +			if(!(c = (Client *)calloc(1, sizeof(Client))))
 +				die("fatal: could not malloc() %u bytes\n", sizeof(Client));
-+			c->win = cme->data.l[2];
++			if (!(c->win = cme->data.l[2])) {
++				free(c);
++				return;
++			}
 +			c->mon = selmon;
 +			c->next = systray->icons;
 +			systray->icons = c;
@@ -209,7 +215,7 @@ Index: dwm/dwm.c
  	if(!c)
  		return;
  	if(cme->message_type == netatom[NetWMState]) {
-@@ -640,7 +722,7 @@ configurenotify(XEvent *e) {
+@@ -640,7 +725,7 @@ configurenotify(XEvent *e) {
  			drw_resize(drw, sw, bh);
  			updatebars();
  			for(m = mons; m; m = m->next)
@@ -218,7 +224,7 @@ Index: dwm/dwm.c
  			focus(NULL);
  			arrange(NULL);
  		}
-@@ -752,6 +834,11 @@ destroynotify(XEvent *e) {
+@@ -752,6 +837,11 @@ destroynotify(XEvent *e) {
  
  	if((c = wintoclient(ev->window)))
  		unmanage(c, True);
@@ -230,7 +236,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -796,6 +883,7 @@ drawbar(Monitor *m) {
+@@ -796,6 +886,7 @@ drawbar(Monitor *m) {
  	unsigned int i, occ = 0, urg = 0;
  	Client *c;
  
@@ -238,7 +244,7 @@ Index: dwm/dwm.c
  	for(c = m->cl->clients; c; c = c->next) {
  		occ |= c->tags;
  		if(c->isurgent)
-@@ -817,6 +905,9 @@ drawbar(Monitor *m) {
+@@ -817,6 +908,9 @@ drawbar(Monitor *m) {
  	xx = x;
  	w = TEXTW(stext);
  	x = m->ww - w;
@@ -248,7 +254,7 @@ Index: dwm/dwm.c
  	if(x < xx) {
  		x = xx;
  		w = m->ww - xx;
-@@ -843,6 +934,7 @@ drawbars(void) {
+@@ -843,6 +937,7 @@ drawbars(void) {
  
  	for(m = mons; m; m = m->next)
  		drawbar(m);
@@ -256,7 +262,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -869,8 +961,11 @@ expose(XEvent *e) {
+@@ -869,8 +964,11 @@ expose(XEvent *e) {
  	Monitor *m;
  	XExposeEvent *ev = &e->xexpose;
  
@@ -269,7 +275,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -956,10 +1051,17 @@ getatomprop(Client *c, Atom prop) {
+@@ -956,10 +1054,17 @@ getatomprop(Client *c, Atom prop) {
  	unsigned long dl;
  	unsigned char *p = NULL;
  	Atom da, atom = None;
@@ -288,7 +294,7 @@ Index: dwm/dwm.c
  		XFree(p);
  	}
  	return atom;
-@@ -991,6 +1093,15 @@ getstate(Window w) {
+@@ -991,6 +1096,15 @@ getstate(Window w) {
  	return result;
  }
  
@@ -304,7 +310,7 @@ Index: dwm/dwm.c
  Bool
  gettextprop(Window w, Atom atom, char *text, unsigned int size) {
  	char **list = NULL;
-@@ -1091,7 +1202,7 @@ void
+@@ -1091,7 +1205,7 @@ void
  killclient(const Arg *arg) {
  	if(!selmon->sel)
  		return;
@@ -313,7 +319,7 @@ Index: dwm/dwm.c
  		XGrabServer(dpy);
  		XSetErrorHandler(xerrordummy);
  		XSetCloseDownMode(dpy, DestroyAll);
-@@ -1188,6 +1299,12 @@ void
+@@ -1188,6 +1302,12 @@ void
  maprequest(XEvent *e) {
  	static XWindowAttributes wa;
  	XMapRequestEvent *ev = &e->xmaprequest;
@@ -326,7 +332,7 @@ Index: dwm/dwm.c
  
  	if(!XGetWindowAttributes(dpy, ev->window, &wa))
  		return;
-@@ -1318,6 +1435,16 @@ propertynotify(XEvent *e) {
+@@ -1318,6 +1438,16 @@ propertynotify(XEvent *e) {
  	Window trans;
  	XPropertyEvent *ev = &e->xproperty;
  
@@ -343,7 +349,7 @@ Index: dwm/dwm.c
  	if((ev->window == root) && (ev->atom == XA_WM_NAME))
  		updatestatus();
  	else if(ev->state == PropertyDelete)
-@@ -1369,12 +1496,33 @@ recttomon(int x, int y, int w, int h) {
+@@ -1369,12 +1499,33 @@ recttomon(int x, int y, int w, int h) {
  }
  
  void
@@ -377,7 +383,7 @@ Index: dwm/dwm.c
  resizeclient(Client *c, int x, int y, int w, int h) {
  	XWindowChanges wc;
  
-@@ -1445,6 +1593,18 @@ resizemouse(const Arg *arg) {
+@@ -1445,6 +1596,18 @@ resizemouse(const Arg *arg) {
  }
  
  void
@@ -396,7 +402,7 @@ Index: dwm/dwm.c
  restack(Monitor *m) {
  	Client *c;
  	XEvent ev;
-@@ -1526,25 +1686,35 @@ setclientstate(Client *c, long state) {
+@@ -1526,25 +1689,35 @@ setclientstate(Client *c, long state) {
  }
  
  Bool
@@ -443,7 +449,7 @@ Index: dwm/dwm.c
  	}
  	return exists;
  }
-@@ -1557,7 +1727,7 @@ setfocus(Client *c) {
+@@ -1557,7 +1730,7 @@ setfocus(Client *c) {
   		                XA_WINDOW, 32, PropModeReplace,
   		                (unsigned char *) &(c->win), 1);
  	}
@@ -452,7 +458,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1645,12 +1815,18 @@ setup(void) {
+@@ -1645,12 +1818,18 @@ setup(void) {
  	wmatom[WMTakeFocus] = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
@@ -471,7 +477,7 @@ Index: dwm/dwm.c
  	/* init cursors */
  	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
-@@ -1664,6 +1840,8 @@ setup(void) {
+@@ -1664,6 +1843,8 @@ setup(void) {
  	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
  	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
  	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
@@ -480,7 +486,7 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1731,6 +1909,22 @@ swapfocus(){
+@@ -1731,6 +1912,22 @@ swapfocus(){
  	}
  }
  
@@ -503,7 +509,7 @@ Index: dwm/dwm.c
  void
  tag(const Arg *arg) {
  	Monitor *m;
-@@ -1811,7 +2005,18 @@ void
+@@ -1811,7 +2008,18 @@ void
  togglebar(const Arg *arg) {
  	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
  	updatebarpos(selmon);
@@ -523,13 +529,14 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1951,11 +2156,18 @@ unmapnotify(XEvent *e) {
+@@ -1951,11 +2159,19 @@ unmapnotify(XEvent *e) {
  		else
  			unmanage(c, False);
  	}
 +	else if((c = wintosystrayicon(ev->window))) {
-+		removesystrayicon(c);
-+		resizebarwin(selmon);
++		/* KLUDGE! sometimes icons occasionally unmap their windows, but do
++		 * _not_ destroy them. We map those windows back */
++		XMapRaised(dpy, c->win);
 +		updatesystray();
 +	}
  }
@@ -542,7 +549,7 @@ Index: dwm/dwm.c
  	XSetWindowAttributes wa = {
  		.override_redirect = True,
  		.background_pixmap = ParentRelative,
-@@ -1964,10 +2176,15 @@ updatebars(void) {
+@@ -1964,10 +2180,15 @@ updatebars(void) {
  	for(m = mons; m; m = m->next) {
  		if (m->barwin)
  			continue;
@@ -559,7 +566,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2161,6 +2378,117 @@ updatestatus(void) {
+@@ -2161,6 +2382,117 @@ updatestatus(void) {
  }
  
  void
@@ -677,7 +684,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2271,6 +2599,16 @@ wintomon(Window w) {
+@@ -2271,6 +2603,16 @@ wintomon(Window w) {
  	return selmon;
  }
  
