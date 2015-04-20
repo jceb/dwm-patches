@@ -6,7 +6,7 @@ Index: dwm/config.def.h
  
  /* appearance */
  static const char *fonts[] = {
-+    "DejaVu Sans Mono for Powerline:size=11.0:antialias=true:autohint=true",
++    "DejaVu Sans Mono for Powerline:size=8.5:antialias=true:autohint=true",
      "Sans:size=10.5",
      "VL Gothic:size=10.5",
      "WenQuanYi Micro Hei:size=10.5",
