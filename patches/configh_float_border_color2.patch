@@ -2,7 +2,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -13,8 +13,8 @@ static const char normfgcolor[]     = "#
+@@ -14,8 +14,8 @@ static const char normfgcolor[]     = "#
  static const char selbordercolor[]  = "#ff0000";
  static const char selbgcolor[]      = "#005577";
  static const char selfgcolor[]      = "#eeeeee";

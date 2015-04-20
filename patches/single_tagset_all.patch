@@ -606,18 +606,30 @@ Index: dwm/push.c
 ===================================================================
 --- dwm/push.c.orig
 +++ dwm/push.c
-@@ -2,8 +2,8 @@ static Client *
- prevtiled(Client *c) {
+@@ -1,9 +1,9 @@
+ Client *
+ nextc(Client *c, float f) {
+ 	if(!f)
+-		return nexttiled(c);
++		return nexttiled(c, selmon);
+ 
+-	for(; c && !ISVISIBLE(c); c = c->next);
++	for(; c && !ISVISIBLE(c, selmon); c = c->next);
+ 	return c;
+ }
+ 
+@@ -11,8 +11,8 @@ static Client *
+ prevc(Client *c, float f) {
  	Client *p, *r;
  
 -	for(p = selmon->clients, r = NULL; p && p != c; p = p->next)
--		if(!p->isfloating && ISVISIBLE(p))
+-		if((f || !p->isfloating) && ISVISIBLE(p))
 +	for(p = selmon->cl->clients, r = NULL; p && p != c; p = p->next)
-+		if(!p->isfloating && ISVISIBLE(p, selmon))
++		if((f || !p->isfloating) && ISVISIBLE(p, selmon))
  			r = p;
  	return r;
  }
-@@ -19,10 +19,10 @@ pushup(const Arg *arg) {
+@@ -28,10 +28,10 @@ pushup(const Arg *arg) {
  		/* attach before c */
  		detach(sel);
  		sel->next = c;
@@ -631,15 +643,6 @@ Index: dwm/push.c
  			c->next = sel;
  		}
  	} else {
-@@ -43,7 +43,7 @@ pushdown(const Arg *arg) {
- 
- 	if(!sel || sel->isfloating)
- 		return;
--	if((c = nexttiled(sel->next))) {
-+	if((c = nexttiled(sel->next, selmon))) {
- 		/* attach after c */
- 		detach(sel);
- 		sel->next = c->next;
 Index: dwm/tagall.c
 ===================================================================
 --- dwm/tagall.c.orig

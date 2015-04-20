@@ -5,13 +5,22 @@ Index: dwm/push.c
 ===================================================================
 --- /dev/null
 +++ dwm/push.c
-@@ -0,0 +1,58 @@
+@@ -0,0 +1,67 @@
++Client *
++nextc(Client *c, float f) {
++	if(!f)
++		return nexttiled(c);
++
++	for(; c && !ISVISIBLE(c); c = c->next);
++	return c;
++}
++
 +static Client *
-+prevtiled(Client *c) {
++prevc(Client *c, float f) {
 +	Client *p, *r;
 +
 +	for(p = selmon->clients, r = NULL; p && p != c; p = p->next)
-+		if(!p->isfloating && ISVISIBLE(p))
++		if((f || !p->isfloating) && ISVISIBLE(p))
 +			r = p;
 +	return r;
 +}
@@ -21,9 +30,9 @@ Index: dwm/push.c
 +	Client *sel = selmon->sel;
 +	Client *c;
 +
-+	if(!sel || sel->isfloating)
++	if(!sel || (sel->isfloating && !arg->f))
 +		return;
-+	if((c = prevtiled(sel))) {
++	if((c = prevc(sel, arg->f))) {
 +		/* attach before c */
 +		detach(sel);
 +		sel->next = c;
@@ -49,9 +58,9 @@ Index: dwm/push.c
 +	Client *sel = selmon->sel;
 +	Client *c;
 +
-+	if(!sel || sel->isfloating)
++	if(!sel || (sel->isfloating && !arg->f))
 +		return;
-+	if((c = nexttiled(sel->next))) {
++	if((c = nextc(sel->next, arg->f))) {
 +		/* attach after c */
 +		detach(sel);
 +		sel->next = c->next;

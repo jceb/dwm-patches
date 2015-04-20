@@ -10,7 +10,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -17,6 +17,10 @@ static const char floatnormbordercolor[]
+@@ -18,6 +18,10 @@ static const char floatnormbordercolor[]
  static const char floatselbordercolor[]  = "#ff0000";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
  static const unsigned int snap      = 32;       /* snap pixel */
