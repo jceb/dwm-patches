@@ -2,8 +2,10 @@ Author: Jan Christoph Ebersbach <jceb@e-jc.de>
 URL: no URL yet
 Straight forward patch to focus the master window with a keybinding.
 
---- dwm.orig//dev/null	Thu Jan 01 00:00:00 1970 +0000
-+++ dwm/focusmaster.c	Sun Aug 05 20:40:13 2012 +0200
+Index: dwm/focusmaster.c
+===================================================================
+--- /dev/null
++++ dwm/focusmaster.c
 @@ -0,0 +1,4 @@
 +static void
 +focusmaster(const Arg *arg) {

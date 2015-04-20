@@ -5,9 +5,9 @@ using keybindings.
 
 Index: dwm/dwm.c
 ===================================================================
---- dwm.orig/dwm.c
+--- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -92,7 +92,7 @@ struct Client {
+@@ -93,7 +93,7 @@ struct Client {
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
  	unsigned int tags;
@@ -16,7 +16,7 @@ Index: dwm/dwm.c
  	Client *next;
  	Client *snext;
  	Monitor *mon;
-@@ -1053,6 +1053,8 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1052,6 +1052,8 @@ manage(Window w, XWindowAttributes *wa)
  	c->sfh = c->h;
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, False);

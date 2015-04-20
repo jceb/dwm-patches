@@ -9,7 +9,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -111,6 +111,7 @@ typedef struct {
+@@ -112,6 +112,7 @@ typedef struct {
  	void (*arrange)(Monitor *);
  } Layout;
  
@@ -17,7 +17,7 @@ Index: dwm/dwm.c
  struct Monitor {
  	char ltsymbol[16];
  	float mfact;
-@@ -130,6 +131,7 @@ struct Monitor {
+@@ -131,6 +132,7 @@ struct Monitor {
  	Monitor *next;
  	Window barwin;
  	const Layout *lt[2];
@@ -25,7 +25,7 @@ Index: dwm/dwm.c
  };
  
  typedef struct {
-@@ -237,7 +239,6 @@ static void zoom(const Arg *arg);
+@@ -238,7 +240,6 @@ static void zoom(const Arg *arg);
  
  /* variables */
  static Client *prevclient = NULL;
@@ -50,7 +50,7 @@ Index: dwm/dwm.c
  /* compile-time check if all tags fit into an unsigned int bit array. */
  struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
  
-@@ -523,6 +534,7 @@ void
+@@ -522,6 +533,7 @@ void
  clientmessage(XEvent *e) {
  	XClientMessageEvent *cme = &e->xclient;
  	Client *c = wintoclient(cme->window);
@@ -58,7 +58,7 @@ Index: dwm/dwm.c
  
  	if(!c)
  		return;
-@@ -535,6 +547,8 @@ clientmessage(XEvent *e) {
+@@ -534,6 +546,8 @@ clientmessage(XEvent *e) {
  		if(!ISVISIBLE(c)) {
  			c->mon->seltags ^= 1;
  			c->mon->tagset[c->mon->seltags] = c->tags;
@@ -67,7 +67,7 @@ Index: dwm/dwm.c
  		}
  		pop(c);
  	}
-@@ -636,6 +650,7 @@ configurerequest(XEvent *e) {
+@@ -635,6 +649,7 @@ configurerequest(XEvent *e) {
  Monitor *
  createmon(void) {
  	Monitor *m;
@@ -75,7 +75,7 @@ Index: dwm/dwm.c
  
  	if(!(m = (Monitor *)calloc(1, sizeof(Monitor))))
  		die("fatal: could not malloc() %u bytes\n", sizeof(Monitor));
-@@ -647,6 +662,27 @@ createmon(void) {
+@@ -646,6 +661,27 @@ createmon(void) {
  	m->lt[0] = &layouts[0];
  	m->lt[1] = &layouts[1 % LENGTH(layouts)];
  	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
@@ -103,7 +103,7 @@ Index: dwm/dwm.c
  	return m;
  }
  
-@@ -966,7 +1002,7 @@ grabkeys(void) {
+@@ -965,7 +1001,7 @@ grabkeys(void) {
  
  void
  incnmaster(const Arg *arg) {
@@ -112,7 +112,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1492,10 +1528,13 @@ setfullscreen(Client *c, Bool fullscreen
+@@ -1491,10 +1527,13 @@ setfullscreen(Client *c, Bool fullscreen
  
  void
  setlayout(const Arg *arg) {
@@ -129,7 +129,7 @@ Index: dwm/dwm.c
  	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
  	if(selmon->sel)
  		arrange(selmon);
-@@ -1513,7 +1552,7 @@ setmfact(const Arg *arg) {
+@@ -1512,7 +1551,7 @@ setmfact(const Arg *arg) {
  	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
  	if(f < 0.1 || f > 0.9)
  		return;

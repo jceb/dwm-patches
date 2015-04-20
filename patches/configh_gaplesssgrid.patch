@@ -3,9 +3,9 @@
 
 Index: dwm/config.def.h
 ===================================================================
---- dwm.orig/config.def.h
+--- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -38,11 +38,13 @@ static const float mfact      = 0.65; /*
+@@ -43,11 +43,13 @@ static const float mfact      = 0.65; /*
  static const int nmaster      = 1;    /* number of clients in master area */
  static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
  
@@ -19,7 +19,7 @@ Index: dwm/config.def.h
  };
  
  /* key definitions */
-@@ -84,6 +86,7 @@ static Key keys[] = {
+@@ -89,6 +91,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },

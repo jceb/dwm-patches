@@ -5,7 +5,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -770,17 +770,13 @@ drawbar(Monitor *m) {
+@@ -769,17 +769,13 @@ drawbar(Monitor *m) {
  	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
  	x += w;
  	xx = x;

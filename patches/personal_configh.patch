@@ -1,13 +1,13 @@
 Index: dwm/config.def.h
 ===================================================================
---- dwm.orig/config.def.h
+--- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -1,11 +1,11 @@
- /* See LICENSE file for copyright and license details. */
- 
- /* appearance */
--static const char font[]            = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-+static const char font[]            = "-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
+@@ -6,11 +6,11 @@ static const char *fonts[] = {
+     "VL Gothic:size=10.5",
+     "WenQuanYi Micro Hei:size=10.5",
+ };
+-static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
++static const char dmenufont[]       = "-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
  static const char normbordercolor[] = "#444444";
  static const char normbgcolor[]     = "#222222";
  static const char normfgcolor[]     = "#bbbbbb";
@@ -16,7 +16,7 @@ Index: dwm/config.def.h
  static const char selbgcolor[]      = "#005577";
  static const char selfgcolor[]      = "#eeeeee";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
-@@ -22,12 +22,17 @@ static const Rule rules[] = {
+@@ -27,12 +27,17 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -37,7 +37,7 @@ Index: dwm/config.def.h
  static const int nmaster      = 1;    /* number of clients in master area */
  static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
  
-@@ -39,7 +44,7 @@ static const Layout layouts[] = {
+@@ -44,7 +49,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -46,16 +46,16 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -52,7 +57,7 @@ static const Layout layouts[] = {
+@@ -57,7 +62,7 @@ static const Layout layouts[] = {
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
- static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", font, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 -static const char *termcmd[]  = { "st", NULL };
 +static const char *termcmd[]  = { "x-terminal-emulator", NULL };
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -71,7 +76,7 @@ static Key keys[] = {
+@@ -76,7 +81,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },

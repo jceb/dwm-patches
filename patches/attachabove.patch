@@ -7,7 +7,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -149,6 +149,7 @@ static Bool applysizehints(Client *c, in
+@@ -150,6 +150,7 @@ static Bool applysizehints(Client *c, in
  static void arrange(Monitor *m);
  static void arrangemon(Monitor *m);
  static void attach(Client *c);
@@ -35,16 +35,16 @@ Index: dwm/dwm.c
  attachstack(Client *c) {
  	c->snext = c->mon->stack;
  	c->mon->stack = c;
-@@ -1106,7 +1120,7 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1105,7 +1119,7 @@ manage(Window w, XWindowAttributes *wa)
  		XRaiseWindow(dpy, c->win);
  	if(c->isfloating)
- 		XSetWindowBorder(dpy, w, scheme[SchemeNorm].floatborder->rgb);
+ 		XSetWindowBorder(dpy, w, scheme[SchemeNorm].floatborder->pix);
 -	attach(c);
 +	attachabove(c);
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
  	                (unsigned char *) &(c->win), 1);
-@@ -1458,7 +1472,7 @@ sendmon(Client *c, Monitor *m) {
+@@ -1457,7 +1471,7 @@ sendmon(Client *c, Monitor *m) {
  	detachstack(c);
  	c->mon = m;
  	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */

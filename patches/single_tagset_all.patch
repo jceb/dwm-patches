@@ -19,7 +19,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -48,7 +48,7 @@
+@@ -49,7 +49,7 @@
  #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
  #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
                                 * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
@@ -28,7 +28,7 @@ Index: dwm/dwm.c
  #define LENGTH(X)               (sizeof X / sizeof X[0])
  #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
  #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
-@@ -112,6 +112,7 @@ typedef struct {
+@@ -113,6 +113,7 @@ typedef struct {
  } Layout;
  
  typedef struct Pertag Pertag;
@@ -36,7 +36,7 @@ Index: dwm/dwm.c
  struct Monitor {
  	char ltsymbol[16];
  	float mfact;
-@@ -125,9 +126,8 @@ struct Monitor {
+@@ -126,9 +127,8 @@ struct Monitor {
  	unsigned int tagset[2];
  	Bool showbar;
  	Bool topbar;
@@ -47,7 +47,7 @@ Index: dwm/dwm.c
  	Monitor *next;
  	Window barwin;
  	const Layout *lt[2];
-@@ -143,6 +143,11 @@ typedef struct {
+@@ -144,6 +144,11 @@ typedef struct {
  	int monitor;
  } Rule;
  
@@ -59,7 +59,7 @@ Index: dwm/dwm.c
  /* function declarations */
  static void applyrules(Client *c);
  static Bool applysizehints(Client *c, int *x, int *y, int *w, int *h, Bool interact);
-@@ -150,6 +155,7 @@ static void arrange(Monitor *m);
+@@ -151,6 +156,7 @@ static void arrange(Monitor *m);
  static void arrangemon(Monitor *m);
  static void attach(Client *c);
  static void attachabove(Client *c);
@@ -67,7 +67,7 @@ Index: dwm/dwm.c
  static void attachstack(Client *c);
  static void buttonpress(XEvent *e);
  static void checkotherwm(void);
-@@ -187,7 +193,7 @@ static void maprequest(XEvent *e);
+@@ -188,7 +194,7 @@ static void maprequest(XEvent *e);
  static void monocle(Monitor *m);
  static void motionnotify(XEvent *e);
  static void movemouse(const Arg *arg);
@@ -76,8 +76,8 @@ Index: dwm/dwm.c
  static void pop(Client *);
  static void propertynotify(XEvent *e);
  static void quit(const Arg *arg);
-@@ -273,6 +279,7 @@ static Drw *drw;
- static Fnt *fnt;
+@@ -273,6 +279,7 @@ static Display *dpy;
+ static Drw *drw;
  static Monitor *mons, *selmon;
  static Window root;
 +static Clientlist *cl;
@@ -183,7 +183,7 @@ Index: dwm/dwm.c
  	XUngrabKey(dpy, AnyKey, AnyModifier, root);
  	while(mons)
  		cleanupmon(mons);
-@@ -558,7 +598,7 @@ clientmessage(XEvent *e) {
+@@ -557,7 +597,7 @@ clientmessage(XEvent *e) {
  			              || (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */ && !c->isfullscreen)));
  	}
  	else if(cme->message_type == netatom[NetActiveWindow]) {
@@ -192,7 +192,7 @@ Index: dwm/dwm.c
  			c->mon->seltags ^= 1;
  			c->mon->tagset[c->mon->seltags] = c->tags;
  			for(i=0; !(c->tags & 1 << i); i++);
-@@ -642,7 +682,7 @@ configurerequest(XEvent *e) {
+@@ -641,7 +681,7 @@ configurerequest(XEvent *e) {
  				c->y = m->my + (m->mh / 2 - HEIGHT(c) / 2); /* center in y direction */
  			if((ev->value_mask & (CWX|CWY)) && !(ev->value_mask & (CWWidth|CWHeight)))
  				configure(c);
@@ -201,7 +201,7 @@ Index: dwm/dwm.c
  				XMoveResizeWindow(dpy, c->win, c->x, c->y, c->w, c->h);
  		}
  		else
-@@ -663,12 +703,18 @@ configurerequest(XEvent *e) {
+@@ -662,12 +702,18 @@ configurerequest(XEvent *e) {
  
  Monitor *
  createmon(void) {
@@ -222,7 +222,7 @@ Index: dwm/dwm.c
  	m->mfact = mfact;
  	m->nmaster = nmaster;
  	m->showbar = showbar;
-@@ -713,7 +759,7 @@ void
+@@ -712,7 +758,7 @@ void
  detach(Client *c) {
  	Client **tc;
  
@@ -231,7 +231,7 @@ Index: dwm/dwm.c
  	*tc = c->next;
  }
  
-@@ -721,11 +767,11 @@ void
+@@ -720,11 +766,11 @@ void
  detachstack(Client *c) {
  	Client **tc, *t;
  
@@ -245,7 +245,7 @@ Index: dwm/dwm.c
  		c->mon->sel = t;
  	}
  }
-@@ -751,7 +797,7 @@ drawbar(Monitor *m) {
+@@ -750,7 +796,7 @@ drawbar(Monitor *m) {
  	unsigned int i, occ = 0, urg = 0;
  	Client *c;
  
@@ -254,7 +254,7 @@ Index: dwm/dwm.c
  		occ |= c->tags;
  		if(c->isurgent)
  			urg |= c->tags;
-@@ -830,8 +876,8 @@ expose(XEvent *e) {
+@@ -829,8 +875,8 @@ expose(XEvent *e) {
  
  void
  focus(Client *c) {
@@ -265,7 +265,7 @@ Index: dwm/dwm.c
  	/* was if(selmon->sel) */
  	if(selmon->sel && selmon->sel != c)
  		unfocus(selmon->sel, False);
-@@ -886,17 +932,17 @@ focusstack(const Arg *arg) {
+@@ -885,17 +931,17 @@ focusstack(const Arg *arg) {
  	if(!selmon->sel)
  		return;
  	if(arg->i > 0) {
@@ -288,7 +288,7 @@ Index: dwm/dwm.c
  					c = i;
  	}
  	if(c) {
-@@ -1157,12 +1203,12 @@ monocle(Monitor *m) {
+@@ -1156,12 +1202,12 @@ monocle(Monitor *m) {
  	unsigned int n = 0, r = 0;
  	Client *c;
  
@@ -304,7 +304,7 @@ Index: dwm/dwm.c
  		/* remove border when in monocle layout */
  		if(c->bw) {
  			c->oldbw = c->bw;
-@@ -1254,8 +1300,8 @@ movemouse(const Arg *arg) {
+@@ -1253,8 +1299,8 @@ movemouse(const Arg *arg) {
  }
  
  Client *
@@ -315,7 +315,7 @@ Index: dwm/dwm.c
  	return c;
  }
  
-@@ -1413,8 +1459,8 @@ restack(Monitor *m) {
+@@ -1412,8 +1458,8 @@ restack(Monitor *m) {
  	if(m->lt[m->sellt]->arrange) {
  		wc.stack_mode = Below;
  		wc.sibling = m->barwin;
@@ -326,7 +326,7 @@ Index: dwm/dwm.c
  				XConfigureWindow(dpy, c->win, CWSibling|CWStackMode, &wc);
  				wc.sibling = c->win;
  			}
-@@ -1464,11 +1510,9 @@ sendmon(Client *c, Monitor *m) {
+@@ -1463,11 +1509,9 @@ sendmon(Client *c, Monitor *m) {
  	if(c->mon == m)
  		return;
  	unfocus(c, True);
@@ -338,15 +338,15 @@ Index: dwm/dwm.c
  	attachstack(c);
  	focus(NULL);
  	arrange(NULL);
-@@ -1589,6 +1633,8 @@ setup(void) {
+@@ -1585,6 +1629,8 @@ setup(void) {
+ 	screen = DefaultScreen(dpy);
  	sw = DisplayWidth(dpy, screen);
  	sh = DisplayHeight(dpy, screen);
- 	bh = fnt->h + 2;
 +	if(!(cl = (Clientlist *)calloc(1, sizeof(Clientlist))))
 +		die("fatal: could not malloc() %u bytes\n", sizeof(Clientlist));
+ 	root = RootWindow(dpy, screen);
  	drw = drw_create(dpy, screen, root, sw, sh);
- 	drw_setfont(drw, fnt);
- 	updategeom();
+ 	drw_load_fonts(drw, fonts, LENGTH(fonts));
 @@ -1639,7 +1685,7 @@ void
  showhide(Client *c) {
  	if(!c)

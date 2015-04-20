@@ -7,7 +7,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -87,6 +87,7 @@ struct Client {
+@@ -88,6 +88,7 @@ struct Client {
  	char name[256];
  	float mina, maxa;
  	int x, y, w, h;
@@ -15,7 +15,7 @@ Index: dwm/dwm.c
  	int oldx, oldy, oldw, oldh;
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
-@@ -1046,6 +1047,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1045,6 +1046,10 @@ manage(Window w, XWindowAttributes *wa)
  	updatewindowtype(c);
  	updatesizehints(c);
  	updatewmhints(c);
