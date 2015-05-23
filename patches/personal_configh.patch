@@ -12,7 +12,7 @@ Index: dwm/config.def.h
      "WenQuanYi Micro Hei:size=10.5",
  };
 -static const char dmenufont[] = "-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-*";
-+static const char dmenufont[]       = "-misc-fixed-medium-r-semicondensed-*-13-120-75-75-c-60-iso10646-1";
++static const char dmenufont[]       = "DejaVu Sans Mono for Powerline:size=8.5:antialias=true:autohint=true";
  static const char normbordercolor[] = "#444444";
  static const char normbgcolor[]     = "#222222";
  static const char normfgcolor[]     = "#bbbbbb";
