@@ -509,7 +509,7 @@ Index: dwm/dwm.c
  void
  tag(const Arg *arg) {
  	Monitor *m;
-@@ -1811,7 +2008,18 @@ void
+@@ -1812,7 +2009,18 @@ void
  togglebar(const Arg *arg) {
  	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
  	updatebarpos(selmon);
@@ -529,7 +529,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1951,11 +2159,19 @@ unmapnotify(XEvent *e) {
+@@ -1952,11 +2160,19 @@ unmapnotify(XEvent *e) {
  		else
  			unmanage(c, False);
  	}
@@ -549,7 +549,7 @@ Index: dwm/dwm.c
  	XSetWindowAttributes wa = {
  		.override_redirect = True,
  		.background_pixmap = ParentRelative,
-@@ -1964,10 +2180,15 @@ updatebars(void) {
+@@ -1965,10 +2181,15 @@ updatebars(void) {
  	for(m = mons; m; m = m->next) {
  		if (m->barwin)
  			continue;
@@ -566,7 +566,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2161,6 +2382,117 @@ updatestatus(void) {
+@@ -2162,6 +2383,117 @@ updatestatus(void) {
  }
  
  void
@@ -684,7 +684,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2271,6 +2603,16 @@ wintomon(Window w) {
+@@ -2272,6 +2604,16 @@ wintomon(Window w) {
  	return selmon;
  }
  

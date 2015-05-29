@@ -19,7 +19,7 @@ Index: dwm/push.c
 +prevc(Client *c, float f) {
 +	Client *p, *r;
 +
-+	for(p = selmon->clients, r = NULL; p && p != c; p = p->next)
++	for(p = selmon->clients, r = NULL; c && p && p != c; p = p->next)
 +		if((f || !p->isfloating) && ISVISIBLE(p))
 +			r = p;
 +	return r;
