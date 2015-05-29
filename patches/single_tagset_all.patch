@@ -672,15 +672,15 @@ Index: dwm/toggleview_focus.c
 ===================================================================
 --- dwm/toggleview_focus.c.orig
 +++ dwm/toggleview_focus.c
-@@ -1,7 +1,7 @@
- static void toggleview_focus(const Arg *arg) {
+@@ -2,7 +2,7 @@ static void toggleview_focus(const Arg *
  	Client *c;
  	toggleview(arg);
+ 	restack(selmon);
 -	for(c = selmon->clients; !(c->tags & arg->ui) && c->next; c = c->next) ;
 +	for(c = selmon->cl->clients; !(c->tags & arg->ui) && c->next; c = c->next) ;
  	if(c && c->tags & arg->ui)
  		focus(c);
- 	restack(selmon);
+ }
 Index: dwm/zoomswap.c
 ===================================================================
 --- dwm/zoomswap.c.orig
