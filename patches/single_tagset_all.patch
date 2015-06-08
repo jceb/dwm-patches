@@ -492,7 +492,7 @@ Index: dwm/dwm.c
  				cleanupmon(m);
  			}
  		}
-@@ -2120,11 +2190,30 @@ updatewmhints(Client *c) {
+@@ -2120,11 +2190,31 @@ updatewmhints(Client *c) {
  
  void
  view(const Arg *arg) {
@@ -513,6 +513,7 @@ Index: dwm/dwm.c
 +			 * are connected */
 +			if(newtagset & selmon->tagset[selmon->seltags])
 +				return;
++			m->sel = selmon->sel;
 +			m->seltags ^= 1;
 +			m->tagset[m->seltags] = selmon->tagset[selmon->seltags];
 +			attachclients(m);
@@ -523,7 +524,7 @@ Index: dwm/dwm.c
  	selmon->seltags ^= 1; /* toggle sel tagset */
  	if(arg->ui & TAGMASK) {
  		selmon->pertag->prevtag = selmon->pertag->curtag;
-@@ -2145,10 +2234,13 @@ view(const Arg *arg) {
+@@ -2145,6 +2235,7 @@ view(const Arg *arg) {
  	selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
  	selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
  	selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
@@ -531,13 +532,7 @@ Index: dwm/dwm.c
  	if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
  		togglebar(NULL);
  	focus(NULL);
- 	arrange(selmon);
-+	/* workaround for swapping tags in a single tagset */
-+	drawbars();
- }
- 
- Client *
-@@ -2157,7 +2249,7 @@ wintoclient(Window w) {
+@@ -2157,7 +2248,7 @@ wintoclient(Window w) {
  	Monitor *m;
  
  	for(m = mons; m; m = m->next)
@@ -546,7 +541,7 @@ Index: dwm/dwm.c
  			if(c->win == w)
  				return c;
  	return NULL;
-@@ -2215,24 +2307,24 @@ xerrorstart(Display *dpy, XErrorEvent *e
+@@ -2215,24 +2306,24 @@ xerrorstart(Display *dpy, XErrorEvent *e
  void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;

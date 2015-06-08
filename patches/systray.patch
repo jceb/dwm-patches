@@ -684,7 +684,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2273,6 +2605,16 @@ wintomon(Window w) {
+@@ -2272,6 +2604,16 @@ wintomon(Window w) {
  	return selmon;
  }
  
