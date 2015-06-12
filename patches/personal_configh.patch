@@ -35,7 +35,7 @@ Index: dwm/config.def.h
 +	{ "Hexchat",  NULL,       NULL,       1,            True,        -1 },
 +	{ "Jitsi",    NULL,       NULL,       1,            True,        -1 },
 +	{ "Rainlendar2", NULL,    NULL,       1,            True,        -1 },
-+	{ "Scratchpad", NULL,     NULL,       1,            True,        -1 },
++	{ NULL, "Scratchpad",     NULL,       1,            True,        -1 },
  };
  
  /* layout(s) */
