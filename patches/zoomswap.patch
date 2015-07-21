@@ -76,7 +76,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -73,6 +73,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -74,6 +74,7 @@ static const char *termcmd[]  = { "x-ter
  #include "moveresize.c"
  #include "tagall.c"
  #include "maximize.c"
