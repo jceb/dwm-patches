@@ -2,7 +2,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -69,6 +69,7 @@ static const char *dmenucmd[] = { "dmenu
+@@ -70,6 +70,7 @@ static const char *dmenucmd[] = { "dmenu
  static const char *termcmd[]  = { "x-terminal-emulator", NULL };
  
  #include "toggleview_focus.c"
@@ -10,7 +10,7 @@ Index: dwm/config.def.h
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-@@ -77,7 +78,7 @@ static Key keys[] = {
+@@ -78,7 +79,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
  	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
  	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -19,7 +19,7 @@ Index: dwm/config.def.h
  	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
  	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
  	{ MODKEY,                       XK_Return, zoom,           {0} },
-@@ -106,6 +107,18 @@ static Key keys[] = {
+@@ -107,6 +108,18 @@ static Key keys[] = {
  	TAGKEYS(                        XK_9,                      8)
  	{ MODKEY,                       XK_q,      quit,           {1} },
  	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
