@@ -21,7 +21,7 @@ Index: dwm/config.def.h
  static const char selbgcolor[]      = "#005577";
  static const char selfgcolor[]      = "#eeeeee";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
-@@ -27,12 +28,21 @@ static const Rule rules[] = {
+@@ -27,12 +28,22 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -30,6 +30,7 @@ Index: dwm/config.def.h
 +	{ "Firefox",  NULL,       NULL,       0,            False,       -1 },
 +	{ "Pidgin",   NULL,       NULL,       0,            True,        -1 },
 +	{ "Empathy",  NULL,       NULL,       0,            True,        -1 },
++	{ "Gajim",    NULL,       NULL,       0,            True,        -1 },
 +	{ "Skype",    NULL,       NULL,       0,            True,        -1 },
 +	{ "Kio_uiserver", NULL,   NULL,       0,            True,        -1 },
 +	{ "Xchat",    NULL,       NULL,       1,            True,        -1 },
@@ -46,7 +47,7 @@ Index: dwm/config.def.h
  static const int nmaster      = 1;    /* number of clients in master area */
  static const Bool resizehints = True; /* True means respect size hints in tiled resizals */
  
-@@ -44,7 +54,7 @@ static const Layout layouts[] = {
+@@ -44,7 +55,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -55,7 +56,7 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -57,7 +67,7 @@ static const Layout layouts[] = {
+@@ -57,7 +68,7 @@ static const Layout layouts[] = {
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
@@ -64,7 +65,7 @@ Index: dwm/config.def.h
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -76,7 +86,7 @@ static Key keys[] = {
+@@ -76,7 +87,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
