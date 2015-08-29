@@ -30,7 +30,7 @@ Index: dwm/config.def.h
 +	{ MODKEY|ControlMask,           XK_a,      moveresize,     {.v = "0X 0y 0w 0h" } },
 +	{ MODKEY|ControlMask,           XK_d,      moveresize,     {.v = "9000X 0y 0w 0h" } },
 +	{ MODKEY|ControlMask,           XK_s,      moveresize,     {.v = "0x 9000Y 0w 0h" } },
-+	{ MODKEY|ControlMask,           XK_w,      moveresize,     {.v = "0x 15Y 0w 0h" } },
++	{ MODKEY|ControlMask,           XK_w,      moveresize,     {.v = "0x 18Y 0w 0h" } },
 +	{ MODKEY|ShiftMask,             XK_a,      moveresize,     {.v = "0x 0y -10w 0h" } },
 +	{ MODKEY|ShiftMask,             XK_d,      moveresize,     {.v = "0x 0y 10w 0h" } },
 +	{ MODKEY|ShiftMask,             XK_s,      moveresize,     {.v = "0x 0y 0w 10h" } },
