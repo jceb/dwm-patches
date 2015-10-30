@@ -6,7 +6,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -14,6 +14,8 @@ static const char normfgcolor[]     = "#
+@@ -11,6 +11,8 @@ static const char normfgcolor[]     = "#
  static const char selbordercolor[]  = "#ff0000";
  static const char selbgcolor[]      = "#005577";
  static const char selfgcolor[]      = "#eeeeee";
@@ -31,7 +31,7 @@ Index: dwm/dwm.c
  		setfocus(c);
  	}
  	else {
-@@ -1041,7 +1044,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1040,7 +1043,10 @@ manage(Window w, XWindowAttributes *wa)
  
  	wc.border_width = c->bw;
  	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -43,7 +43,7 @@ Index: dwm/dwm.c
  	configure(c); /* propagates border_width, if size doesn't change */
  	updatewindowtype(c);
  	updatesizehints(c);
-@@ -1058,6 +1064,8 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1057,6 +1063,8 @@ manage(Window w, XWindowAttributes *wa)
  		c->isfloating = c->oldstate = trans != None || c->isfixed;
  	if(c->isfloating)
  		XRaiseWindow(dpy, c->win);
@@ -52,7 +52,7 @@ Index: dwm/dwm.c
  	attach(c);
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
-@@ -1541,9 +1549,11 @@ setup(void) {
+@@ -1540,9 +1548,11 @@ setup(void) {
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
  	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
  	/* init appearance */
@@ -64,7 +64,7 @@ Index: dwm/dwm.c
  	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
  	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
  	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
-@@ -1660,6 +1670,10 @@ togglefloating(const Arg *arg) {
+@@ -1659,6 +1669,10 @@ togglefloating(const Arg *arg) {
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if(selmon->sel->isfloating)

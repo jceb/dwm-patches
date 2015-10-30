@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2088,14 +2089,38 @@ void
+@@ -2086,14 +2087,38 @@ void
  zoom(const Arg *arg) {
  	Client *c = selmon->sel;
  	prevclient = nexttiled(selmon->clients);
@@ -76,7 +76,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -76,6 +76,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -73,6 +73,7 @@ static const char *termcmd[]  = { "x-ter
  #include "moveresize.c"
  #include "tagall.c"
  #include "maximize.c"

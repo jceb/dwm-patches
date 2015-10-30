@@ -13,7 +13,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -18,6 +18,10 @@ static const char floatnormbordercolor[]
+@@ -15,6 +15,10 @@ static const char floatnormbordercolor[]
  static const char floatselbordercolor[]  = "#ff0000";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
  static const unsigned int snap      = 32;       /* snap pixel */
@@ -149,7 +149,7 @@ Index: dwm/dwm.c
  static Bool running = True;
  static Bool restart = False;
  static Cur *cursor[CurLast];
-@@ -541,6 +578,11 @@ cleanup(void) {
+@@ -542,6 +579,11 @@ cleanup(void) {
  	XUngrabKey(dpy, AnyKey, AnyModifier, root);
  	while(mons)
  		cleanupmon(mons);
@@ -158,10 +158,10 @@ Index: dwm/dwm.c
 +		XDestroyWindow(dpy, systray->win);
 +		free(systray);
 +	}
- 	drw_cur_free(drw, cursor[CurNormal]);
- 	drw_cur_free(drw, cursor[CurResize]);
- 	drw_cur_free(drw, cursor[CurMove]);
-@@ -585,10 +627,53 @@ clearurgent(Client *c) {
+ 	for(i = 0; i < CurLast; i++)
+ 		drw_cur_free(drw, cursor[i]);
+ 	for(i = 0; i < SchemeLast; i++) {
+@@ -584,10 +626,53 @@ clearurgent(Client *c) {
  
  void
  clientmessage(XEvent *e) {
@@ -215,7 +215,7 @@ Index: dwm/dwm.c
  	if(!c)
  		return;
  	if(cme->message_type == netatom[NetWMState]) {
-@@ -640,7 +725,7 @@ configurenotify(XEvent *e) {
+@@ -639,7 +724,7 @@ configurenotify(XEvent *e) {
  			drw_resize(drw, sw, bh);
  			updatebars();
  			for(m = mons; m; m = m->next)
@@ -224,7 +224,7 @@ Index: dwm/dwm.c
  			focus(NULL);
  			arrange(NULL);
  		}
-@@ -752,6 +837,11 @@ destroynotify(XEvent *e) {
+@@ -750,6 +835,11 @@ destroynotify(XEvent *e) {
  
  	if((c = wintoclient(ev->window)))
  		unmanage(c, True);
@@ -237,8 +237,8 @@ Index: dwm/dwm.c
  
  void
 @@ -796,6 +886,7 @@ drawbar(Monitor *m) {
- 	unsigned int i, occ = 0, urg = 0;
- 	Client *c;
+ 
+ 	dx = (drw->fonts[0]->ascent + drw->fonts[0]->descent + 2) / 4;
  
 +	resizebarwin(m);
  	for(c = m->cl->clients; c; c = c->next) {
@@ -319,7 +319,7 @@ Index: dwm/dwm.c
  		XGrabServer(dpy);
  		XSetErrorHandler(xerrordummy);
  		XSetCloseDownMode(dpy, DestroyAll);
-@@ -1188,6 +1302,12 @@ void
+@@ -1187,6 +1301,12 @@ void
  maprequest(XEvent *e) {
  	static XWindowAttributes wa;
  	XMapRequestEvent *ev = &e->xmaprequest;
@@ -332,7 +332,7 @@ Index: dwm/dwm.c
  
  	if(!XGetWindowAttributes(dpy, ev->window, &wa))
  		return;
-@@ -1318,6 +1438,16 @@ propertynotify(XEvent *e) {
+@@ -1317,6 +1437,16 @@ propertynotify(XEvent *e) {
  	Window trans;
  	XPropertyEvent *ev = &e->xproperty;
  
@@ -349,7 +349,7 @@ Index: dwm/dwm.c
  	if((ev->window == root) && (ev->atom == XA_WM_NAME))
  		updatestatus();
  	else if(ev->state == PropertyDelete)
-@@ -1369,12 +1499,33 @@ recttomon(int x, int y, int w, int h) {
+@@ -1368,12 +1498,33 @@ recttomon(int x, int y, int w, int h) {
  }
  
  void
@@ -383,7 +383,7 @@ Index: dwm/dwm.c
  resizeclient(Client *c, int x, int y, int w, int h) {
  	XWindowChanges wc;
  
-@@ -1445,6 +1596,18 @@ resizemouse(const Arg *arg) {
+@@ -1444,6 +1595,18 @@ resizemouse(const Arg *arg) {
  }
  
  void
@@ -402,7 +402,7 @@ Index: dwm/dwm.c
  restack(Monitor *m) {
  	Client *c;
  	XEvent ev;
-@@ -1526,25 +1689,35 @@ setclientstate(Client *c, long state) {
+@@ -1525,25 +1688,35 @@ setclientstate(Client *c, long state) {
  }
  
  Bool
@@ -449,7 +449,7 @@ Index: dwm/dwm.c
  	}
  	return exists;
  }
-@@ -1557,7 +1730,7 @@ setfocus(Client *c) {
+@@ -1556,7 +1729,7 @@ setfocus(Client *c) {
   		                XA_WINDOW, 32, PropModeReplace,
   		                (unsigned char *) &(c->win), 1);
  	}
@@ -458,7 +458,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1645,12 +1818,18 @@ setup(void) {
+@@ -1644,12 +1817,18 @@ setup(void) {
  	wmatom[WMTakeFocus] = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
@@ -477,7 +477,7 @@ Index: dwm/dwm.c
  	/* init cursors */
  	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
-@@ -1664,6 +1843,8 @@ setup(void) {
+@@ -1663,6 +1842,8 @@ setup(void) {
  	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
  	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
  	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
@@ -486,7 +486,7 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1731,6 +1912,22 @@ swapfocus(){
+@@ -1730,6 +1911,22 @@ swapfocus(){
  	}
  }
  
@@ -509,7 +509,7 @@ Index: dwm/dwm.c
  void
  tag(const Arg *arg) {
  	Monitor *m;
-@@ -1811,7 +2008,18 @@ void
+@@ -1810,7 +2007,18 @@ void
  togglebar(const Arg *arg) {
  	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
  	updatebarpos(selmon);
@@ -529,7 +529,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1951,11 +2159,19 @@ unmapnotify(XEvent *e) {
+@@ -1950,11 +2158,19 @@ unmapnotify(XEvent *e) {
  		else
  			unmanage(c, False);
  	}
@@ -549,7 +549,7 @@ Index: dwm/dwm.c
  	XSetWindowAttributes wa = {
  		.override_redirect = True,
  		.background_pixmap = ParentRelative,
-@@ -1964,10 +2180,15 @@ updatebars(void) {
+@@ -1963,10 +2179,15 @@ updatebars(void) {
  	for(m = mons; m; m = m->next) {
  		if (m->barwin)
  			continue;
@@ -566,7 +566,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2161,6 +2382,117 @@ updatestatus(void) {
+@@ -2159,6 +2380,117 @@ updatestatus(void) {
  }
  
  void
@@ -684,7 +684,7 @@ Index: dwm/dwm.c
  updatewindowtype(Client *c) {
  	Atom state = getatomprop(c, netatom[NetWMState]);
  	Atom wtype = getatomprop(c, netatom[NetWMWindowType]);
-@@ -2272,6 +2604,16 @@ wintomon(Window w) {
+@@ -2270,6 +2602,16 @@ wintomon(Window w) {
  	return selmon;
  }
  

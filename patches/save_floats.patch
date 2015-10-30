@@ -15,7 +15,7 @@ Index: dwm/dwm.c
  	int oldx, oldy, oldw, oldh;
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
-@@ -1045,6 +1046,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1044,6 +1045,10 @@ manage(Window w, XWindowAttributes *wa)
  	updatewindowtype(c);
  	updatesizehints(c);
  	updatewmhints(c);
@@ -26,7 +26,7 @@ Index: dwm/dwm.c
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, False);
  	if(!c->isfloating)
-@@ -1653,8 +1658,16 @@ togglefloating(const Arg *arg) {
+@@ -1652,8 +1657,16 @@ togglefloating(const Arg *arg) {
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if(selmon->sel->isfloating)
