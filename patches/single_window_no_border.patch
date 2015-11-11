@@ -7,21 +7,21 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -1142,7 +1142,7 @@ maprequest(XEvent *e) {
- 
+@@ -1172,7 +1172,7 @@ maprequest(XEvent *e)
  void
- monocle(Monitor *m) {
+ monocle(Monitor *m)
+ {
 -	unsigned int n = 0;
 +	unsigned int n = 0, r = 0;
  	Client *c;
  
- 	for(c = m->clients; c; c = c->next)
-@@ -1150,8 +1150,17 @@ monocle(Monitor *m) {
+ 	for (c = m->clients; c; c = c->next)
+@@ -1180,8 +1180,17 @@ monocle(Monitor *m)
  			n++;
- 	if(n > 0) /* override layout symbol */
+ 	if (n > 0) /* override layout symbol */
  		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
--	for(c = nexttiled(m->clients); c; c = nexttiled(c->next))
--		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, False);
+-	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
+-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
 +	for(c = nexttiled(m->clients); c; c = nexttiled(c->next)) {
 +		/* remove border when in monocle layout */
 +		if(c->bw) {
@@ -36,21 +36,21 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1681,7 +1690,7 @@ tagmon(const Arg *arg) {
- 
+@@ -1739,7 +1748,7 @@ tagmon(const Arg *arg)
  void
- tile(Monitor *m) {
+ tile(Monitor *m)
+ {
 -	unsigned int i, n, h, mw, my, ty;
 +	unsigned int i, n, h, mw, my, ty, r;
  	Client *c;
  
- 	for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-@@ -1692,17 +1701,36 @@ tile(Monitor *m) {
+ 	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+@@ -1750,16 +1759,35 @@ tile(Monitor *m)
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
--	for(i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-+	for(i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++, r = 0) {
+-	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
++	for (i = my = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++, r = 0) {
 +		if(n == 1) {
 +			if (c->bw) {
 +				/* remove border when only one window is on the current tag */
@@ -65,16 +65,15 @@ Index: dwm/dwm.c
 +			c->oldbw = 0;
 +			r = 1;
 +		}
- 		if(i < m->nmaster) {
+ 		if (i < m->nmaster) {
  			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
- 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), False);
+ 			resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), 0);
 +			if(r)
 +				resizeclient(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw));
  			my += HEIGHT(c);
- 		}
- 		else {
+ 		} else {
  			h = (m->wh - ty) / (n - i);
- 			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), False);
+ 			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
 +			if(r)
 +				resizeclient(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw));
  			ty += HEIGHT(c);
@@ -83,7 +82,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1724,10 +1752,16 @@ togglefloating(const Arg *arg) {
+@@ -1783,10 +1811,16 @@ togglefloating(const Arg *arg)
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].floatborder->pix);
  	else
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel].border->pix);
@@ -96,7 +95,7 @@ Index: dwm/dwm.c
 +		}
  		/*restore last known float dimensions*/
  		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
- 		       selmon->sel->sfw, selmon->sel->sfh, False);
+ 		       selmon->sel->sfw, selmon->sel->sfh, 0);
 +	}
  	else {
  		/*save last known float dimensions*/

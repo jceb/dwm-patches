@@ -15,7 +15,7 @@ Index: dwm/dwm.c
  	int oldx, oldy, oldw, oldh;
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
-@@ -1044,6 +1045,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1071,6 +1072,10 @@ manage(Window w, XWindowAttributes *wa)
  	updatewindowtype(c);
  	updatesizehints(c);
  	updatewmhints(c);
@@ -24,17 +24,17 @@ Index: dwm/dwm.c
 +	c->sfw = c->w;
 +	c->sfh = c->h;
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
- 	grabbuttons(c, False);
- 	if(!c->isfloating)
-@@ -1652,8 +1657,16 @@ togglefloating(const Arg *arg) {
+ 	grabbuttons(c, 0);
+ 	if (!c->isfloating)
+@@ -1710,8 +1715,16 @@ togglefloating(const Arg *arg)
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
- 	if(selmon->sel->isfloating)
+ 	if (selmon->sel->isfloating)
 -		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
--		       selmon->sel->w, selmon->sel->h, False);
+-		       selmon->sel->w, selmon->sel->h, 0);
 +		/*restore last known float dimensions*/
 +		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
-+		       selmon->sel->sfw, selmon->sel->sfh, False);
++		       selmon->sel->sfw, selmon->sel->sfh, 0);
 +	else {
 +		/*save last known float dimensions*/
 +		selmon->sel->sfx = selmon->sel->x;

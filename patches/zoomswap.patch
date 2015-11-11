@@ -14,24 +14,24 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2086,14 +2087,38 @@ void
- zoom(const Arg *arg) {
+@@ -2157,14 +2158,38 @@ zoom(const Arg *arg)
+ {
  	Client *c = selmon->sel;
  	prevclient = nexttiled(selmon->clients);
 +	Client *at = NULL, *cold, *cprevious = NULL;
  
- 	if(!selmon->lt[selmon->sellt]->arrange
+ 	if (!selmon->lt[selmon->sellt]->arrange
  	|| (selmon->sel && selmon->sel->isfloating))
  		return;
--	if(c == nexttiled(selmon->clients))
--		if(!c || !(c = prevclient = nexttiled(c->next)))
+-	if (c == nexttiled(selmon->clients))
+-		if (!c || !(c = prevclient = nexttiled(c->next)))
 -			return;
 -	pop(c);
-+	if(c == nexttiled(selmon->clients)) {
++	if (c == nexttiled(selmon->clients)) {
 +		at = findbefore(prevzoom);
-+		if(at)
++		if (at)
 +			cprevious = nexttiled(at->next);
-+		if(!cprevious || cprevious != prevzoom) {
++		if (!cprevious || cprevious != prevzoom) {
 +			prevzoom = NULL;
 +			if(!c || !(c = prevclient = nexttiled(c->next)))
 +				return;
@@ -39,12 +39,12 @@ Index: dwm/dwm.c
 +			c = cprevious;
 +	}
 +	cold = nexttiled(selmon->clients);
-+	if(c != cold && !at)
++	if (c != cold && !at)
 +		at = findbefore(c);
 +	detach(c);
 +	attach(c);
 +	/* swap windows instead of pushing the previous one down */
-+	if(c != cold && at) {
++	if (c != cold && at) {
 +		prevzoom = cold;
 +		if(cold && at != cold) {
 +			detach(cold);
@@ -76,7 +76,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -73,6 +73,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -75,6 +75,7 @@ static const char *termcmd[]  = { "x-ter
  #include "moveresize.c"
  #include "tagall.c"
  #include "maximize.c"
