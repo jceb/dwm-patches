@@ -29,11 +29,16 @@ Index: dwm/toggleview_focus.c
 ===================================================================
 --- /dev/null
 +++ dwm/toggleview_focus.c
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,13 @@
 +static void toggleview_focus(const Arg *arg) {
 +	Client *c;
 +	toggleview(arg);
 +	restack(selmon);
++	for(c = selmon->clients; c; c = c->next) {
++		if (c->tags & arg->ui && c->isfloating) {
++			XRaiseWindow(dpy, c->win);
++		}
++	}
 +	for(c = selmon->clients; !(c->tags & arg->ui) && c->next; c = c->next) ;
 +	if(c && c->tags & arg->ui)
 +		focus(c);
