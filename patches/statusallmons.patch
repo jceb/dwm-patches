@@ -5,7 +5,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -785,16 +785,13 @@ drawbar(Monitor *m)
+@@ -790,16 +790,13 @@ drawbar(Monitor *m)
  	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
  	x += w;
  	xx = x;
@@ -29,7 +29,7 @@ Index: dwm/dwm.c
  	if ((w = x - xx) > bh) {
  		x = xx;
  		if (m->sel) {
-@@ -2147,9 +2144,11 @@ updatetitle(Client *c)
+@@ -2152,9 +2149,11 @@ updatetitle(Client *c)
  void
  updatestatus(void)
  {

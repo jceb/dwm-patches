@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static Cur *cursor[CurLast];
  static ClrScheme scheme[SchemeLast];
  static Display *dpy;
-@@ -1265,6 +1266,8 @@ propertynotify(XEvent *e)
+@@ -1270,6 +1271,8 @@ propertynotify(XEvent *e)
  void
  quit(const Arg *arg)
  {
@@ -23,7 +23,7 @@ Index: dwm/dwm.c
  	running = 0;
  }
  
-@@ -2135,6 +2138,8 @@ main(int argc, char *argv[])
+@@ -2140,6 +2143,8 @@ main(int argc, char *argv[])
  	setup();
  	scan();
  	run();

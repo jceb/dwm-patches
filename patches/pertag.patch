@@ -67,7 +67,7 @@ Index: dwm/dwm.c
  		}
  		pop(c);
  	}
-@@ -645,6 +659,7 @@ Monitor *
+@@ -650,6 +664,7 @@ Monitor *
  createmon(void)
  {
  	Monitor *m;
@@ -75,7 +75,7 @@ Index: dwm/dwm.c
  
  	m = ecalloc(1, sizeof(Monitor));
  	m->tagset[0] = m->tagset[1] = 1;
-@@ -655,6 +670,27 @@ createmon(void)
+@@ -660,6 +675,27 @@ createmon(void)
  	m->lt[0] = &layouts[0];
  	m->lt[1] = &layouts[1 % LENGTH(layouts)];
  	strncpy(m->ltsymbol, layouts[0].symbol, sizeof m->ltsymbol);
@@ -103,7 +103,7 @@ Index: dwm/dwm.c
  	return m;
  }
  
-@@ -989,7 +1025,7 @@ grabkeys(void)
+@@ -994,7 +1030,7 @@ grabkeys(void)
  void
  incnmaster(const Arg *arg)
  {
@@ -112,7 +112,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1538,10 +1574,13 @@ setfullscreen(Client *c, int fullscreen)
+@@ -1543,10 +1579,13 @@ setfullscreen(Client *c, int fullscreen)
  void
  setlayout(const Arg *arg)
  {
@@ -129,7 +129,7 @@ Index: dwm/dwm.c
  	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
  	if (selmon->sel)
  		arrange(selmon);
-@@ -1560,7 +1599,7 @@ setmfact(const Arg *arg)
+@@ -1565,7 +1604,7 @@ setmfact(const Arg *arg)
  	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
  	if (f < 0.1 || f > 0.9)
  		return;
@@ -138,7 +138,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1726,7 +1765,7 @@ tile(Monitor *m)
+@@ -1731,7 +1770,7 @@ tile(Monitor *m)
  void
  togglebar(const Arg *arg)
  {
@@ -147,7 +147,7 @@ Index: dwm/dwm.c
  	updatebarpos(selmon);
  	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
  	arrange(selmon);
-@@ -1777,9 +1816,29 @@ void
+@@ -1782,9 +1821,29 @@ void
  toggleview(const Arg *arg)
  {
  	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
@@ -177,7 +177,7 @@ Index: dwm/dwm.c
  		focus(NULL);
  		arrange(selmon);
  	}
-@@ -2078,11 +2137,32 @@ updatewmhints(Client *c)
+@@ -2083,11 +2142,32 @@ updatewmhints(Client *c)
  void
  view(const Arg *arg)
  {
@@ -211,7 +211,7 @@ Index: dwm/dwm.c
  	focus(NULL);
  	arrange(selmon);
  }
-@@ -2164,11 +2244,11 @@ zoom(const Arg *arg)
+@@ -2169,11 +2249,11 @@ zoom(const Arg *arg)
  	|| (selmon->sel && selmon->sel->isfloating))
  		return;
  	if (c == nexttiled(selmon->clients)) {
@@ -226,7 +226,7 @@ Index: dwm/dwm.c
  			if(!c || !(c = prevclient = nexttiled(c->next)))
  				return;
  		} else
-@@ -2181,7 +2261,7 @@ zoom(const Arg *arg)
+@@ -2186,7 +2266,7 @@ zoom(const Arg *arg)
  	attach(c);
  	/* swap windows instead of pushing the previous one down */
  	if (c != cold && at) {
