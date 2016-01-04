@@ -19,22 +19,26 @@ Index: dwm/config.def.h
  static const char selbgcolor[]      = "#005577";
  static const char selfgcolor[]      = "#eeeeee";
  static const unsigned int borderpx  = 1;        /* border pixel of windows */
-@@ -27,10 +27,22 @@ static const Rule rules[] = {
+@@ -25,12 +25,24 @@ static const Rule rules[] = {
+ 	 *	WM_NAME(STRING) = title
+ 	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
- 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
- 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-+	{ "Firefox",  NULL,       NULL,       0,            False,       -1 },
-+	{ "Pidgin",   NULL,       NULL,       0,            True,        -1 },
-+	{ "Empathy",  NULL,       NULL,       0,            True,        -1 },
-+	{ "Gajim",    NULL,       NULL,       0,            True,        -1 },
-+	{ "Skype",    NULL,       NULL,       0,            True,        -1 },
-+	{ "Kio_uiserver", NULL,   NULL,       0,            True,        -1 },
-+	{ "Xchat",    NULL,       NULL,       1,            True,        -1 },
-+	{ "Hexchat",  NULL,       NULL,       1,            True,        -1 },
-+	{ "Jitsi",    NULL,       NULL,       1,            True,        -1 },
-+	{ "Rainlendar2", NULL,    NULL,       1,            True,        -1 },
-+	{ "Turpial",  NULL,       NULL,       1,            True,        -1 },
-+	{ NULL, "Scratchpad",     NULL,       1,            True,        -1 },
+-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
++	{ "Gimp",     NULL,       NULL,       0,            0,           -1 },
++	{ "Firefox",  NULL,       NULL,       0,            0,           -1 },
++	{ "Pidgin",   NULL,       NULL,       0,            1,           -1 },
++	{ "Empathy",  NULL,       NULL,       0,            1,           -1 },
++	{ "Gajim",    NULL,       NULL,       0,            1,           -1 },
++	{ "Skype",    NULL,       NULL,       0,            1,           -1 },
++	{ "Kio_uiserver", NULL,   NULL,       0,            1,           -1 },
++	{ "Xchat",    NULL,       NULL,       1,            1,           -1 },
++	{ "Hexchat",  NULL,       NULL,       1,            1,           -1 },
++	{ "Jitsi",    NULL,       NULL,       0,            1,           -1 },
++	{ "Rainlendar2", NULL,    NULL,       1,            1,           -1 },
++	{ "Turpial",  NULL,       NULL,       1,            1,           -1 },
++	{ "krunner",  NULL,       NULL,       0,            1,           -1 },
++	{ NULL, "Scratchpad",     NULL,       1,            1,           -1 },
  };
  
  /* layout(s) */
