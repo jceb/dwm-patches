@@ -1,2 +1,2 @@
 #!/bin/sh
-cd "$(dirname "$0")" && ./build && cd dwm && sudo make PREFIX=/usr install
+cd "$(dirname "$0")" && ./build && cd dwm && make PREFIX=~/.local install
