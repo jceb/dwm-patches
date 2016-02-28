@@ -38,7 +38,7 @@ Index: dwm/config.def.h
 +	{ "Rainlendar2", NULL,    NULL,       1,            1,           -1 },
 +	{ "Turpial",  NULL,       NULL,       1,            1,           -1 },
 +	{ "krunner",  NULL,       NULL,       0,            1,           -1 },
-+	{ NULL, "Scratchpad",     NULL,       1,            1,           -1 },
++	{ "Scratchpad", NULL,     NULL,       1,            1,           -1 },
  };
  
  /* layout(s) */
