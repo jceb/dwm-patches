@@ -1,0 +1,30 @@
+Index: dwm-patches/dwm/dwm.c
+===================================================================
+--- dwm-patches.orig/dwm/dwm.c
++++ dwm-patches/dwm/dwm.c
+@@ -79,7 +79,7 @@
+ enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
+ enum { SchemeNorm, SchemeSel, SchemeLast }; /* color schemes */
+ enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
+-	   NetWMName, NetWMState, NetWMFullscreen, NetActiveWindow, NetWMWindowType,
++	   NetWMName, NetWMState, NetWMFullscreen, NetActiveWindow, NetWMWindowType, NetWMWindowTypeDock,
+ 	   NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
+ enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
+ enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+@@ -1900,6 +1900,7 @@ setup(void)
+ 	netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
+ 	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
+ 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
++	netatom[NetWMWindowTypeDock] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", False);
+ 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
+ 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+ 	xatom[Manager] = XInternAtom(dpy, "MANAGER", False);
+@@ -2255,6 +2256,8 @@ updatebars(void)
+ 		m->barwin = XCreateWindow(dpy, root, m->wx, m->by, w, bh, 0, DefaultDepth(dpy, screen),
+ 		                          CopyFromParent, DefaultVisual(dpy, screen),
+ 		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
++		XChangeProperty(dpy, m->barwin, netatom[NetWMWindowType], XA_ATOM, 32,
++				PropModeReplace, (unsigned char *) & netatom[NetWMWindowTypeDock], 1);
+ 		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
+ 		if (showsystray && m == systraytomon(m))
+ 			XMapRaised(dpy, systray->win);

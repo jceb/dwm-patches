@@ -28,12 +28,11 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -59,12 +59,30 @@
+@@ -59,12 +59,29 @@
  #define ColBorder               2
  #define ColFloat                3
  
 +#define SYSTEM_TRAY_REQUEST_DOCK    0
-+#define _NET_SYSTEM_TRAY_ORIENTATION_HORZ 0
 +
 +/* XEMBED messages */
 +#define XEMBED_EMBEDDED_NOTIFY      0
@@ -55,14 +54,14 @@ Index: dwm/dwm.c
 -enum { NetSupported, NetWMName, NetWMState,
 -       NetWMFullscreen, NetActiveWindow, NetWMWindowType,
 -       NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
-+enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation,
++enum { NetSupported, NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
 +	   NetWMName, NetWMState, NetWMFullscreen, NetActiveWindow, NetWMWindowType,
 +	   NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
 +enum { Manager, Xembed, XembedInfo, XLast }; /* Xembed atoms */
  enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
  enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
         ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
-@@ -146,6 +164,12 @@ typedef struct {
+@@ -146,6 +163,12 @@ typedef struct {
  	int monitor;
  } Rule;
  
@@ -75,7 +74,7 @@ Index: dwm/dwm.c
  struct Clientlist {
  	Client *clients;
  	Client *stack;
-@@ -182,8 +206,10 @@ static void focus(Client *c);
+@@ -182,8 +205,10 @@ static void focus(Client *c);
  static void focusin(XEvent *e);
  static void focusmon(const Arg *arg);
  static void focusstack(const Arg *arg);
@@ -86,7 +85,7 @@ Index: dwm/dwm.c
  static int gettextprop(Window w, Atom atom, char *text, unsigned int size);
  static void grabbuttons(Client *c, int focused);
  static void grabkeys(void);
-@@ -201,13 +227,16 @@ static void pop(Client *);
+@@ -201,13 +226,16 @@ static void pop(Client *);
  static void propertynotify(XEvent *e);
  static void quit(const Arg *arg);
  static Monitor *recttomon(int x, int y, int w, int h);
@@ -104,7 +103,7 @@ Index: dwm/dwm.c
  static void sendmon(Client *c, Monitor *m);
  static void setclientstate(Client *c, long state);
  static void setfocus(Client *c);
-@@ -219,6 +248,7 @@ static void showhide(Client *c);
+@@ -219,6 +247,7 @@ static void showhide(Client *c);
  static void sigchld(int unused);
  static void spawn(const Arg *arg);
  static void swapfocus();
@@ -112,7 +111,7 @@ Index: dwm/dwm.c
  static void tag(const Arg *arg);
  static void tagmon(const Arg *arg);
  static void tile(Monitor *);
-@@ -236,18 +266,24 @@ static void updateclientlist(void);
+@@ -236,18 +265,23 @@ static void updateclientlist(void);
  static void updatenumlockmask(void);
  static void updatesizehints(Client *c);
  static void updatestatus(void);
@@ -133,11 +132,10 @@ Index: dwm/dwm.c
  
  /* variables */
 +static Systray *systray = NULL;
-+static unsigned long systrayorientation = _NET_SYSTEM_TRAY_ORIENTATION_HORZ;
  static Client *prevclient = NULL;
  static const char broken[] = "broken";
  static char stext[256];
-@@ -271,9 +307,10 @@ static void (*handler[LASTEvent]) (XEven
+@@ -271,9 +305,10 @@ static void (*handler[LASTEvent]) (XEven
  	[MapRequest] = maprequest,
  	[MotionNotify] = motionnotify,
  	[PropertyNotify] = propertynotify,
@@ -149,7 +147,7 @@ Index: dwm/dwm.c
  static int running = 1;
  static int restart = 0;
  static Cur *cursor[CurLast];
-@@ -553,6 +590,11 @@ cleanup(void)
+@@ -553,6 +588,11 @@ cleanup(void)
  	XUngrabKey(dpy, AnyKey, AnyModifier, root);
  	while (mons)
  		cleanupmon(mons);
@@ -161,7 +159,7 @@ Index: dwm/dwm.c
  	for (i = 0; i < CurLast; i++)
  		drw_cur_free(drw, cursor[i]);
  	for (i = 0; i < SchemeLast; i++)
-@@ -595,10 +637,53 @@ clearurgent(Client *c)
+@@ -595,10 +635,55 @@ clearurgent(Client *c)
  void
  clientmessage(XEvent *e)
  {
@@ -200,6 +198,8 @@ Index: dwm/dwm.c
 +			/* use parents background color */
 +			swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
 +			XChangeWindowAttributes(dpy, c->win, CWBackPixel, &swa);
++			XChangeProperty(dpy, c->win, netatom[NetWMWindowType], XA_ATOM, 32,
++					PropModeAppend, (unsigned char *)&netatom[NetWMWindowTypeDock], 1);
 +			sendevent(c->win, netatom[Xembed], StructureNotifyMask, CurrentTime, XEMBED_EMBEDDED_NOTIFY, 0 , systray->win, XEMBED_EMBEDDED_VERSION);
 +			/* FIXME not sure if I have to send these events, too */
 +			sendevent(c->win, netatom[Xembed], StructureNotifyMask, CurrentTime, XEMBED_FOCUS_IN, 0 , systray->win, XEMBED_EMBEDDED_VERSION);
@@ -481,13 +481,14 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1717,12 +1892,18 @@ setup(void)
+@@ -1717,12 +1892,19 @@ setup(void)
  	wmatom[WMTakeFocus] = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
  	netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
  	netatom[NetSupported] = XInternAtom(dpy, "_NET_SUPPORTED", False);
 +	netatom[NetSystemTray] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_S0", False);
 +	netatom[NetSystemTrayOP] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", False);
 +	netatom[NetSystemTrayOrientation] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_ORIENTATION", False);
++	netatom[NetSystemTrayOrientationHorz] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_ORIENTATION_HORZ", False);
  	netatom[NetWMName] = XInternAtom(dpy, "_NET_WM_NAME", False);
  	netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
  	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
@@ -500,7 +501,7 @@ Index: dwm/dwm.c
  	/* init cursors */
  	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
-@@ -1730,6 +1911,8 @@ setup(void)
+@@ -1730,6 +1912,8 @@ setup(void)
  	/* init appearance */
  	scheme[SchemeNorm] = drw_scm_create(drw, colors[SchemeNorm], 4);
  	scheme[SchemeSel] = drw_scm_create(drw, colors[SchemeSel], 4);
@@ -509,7 +510,7 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1755,10 +1938,12 @@ showhide(Client *c)
+@@ -1755,10 +1939,12 @@ showhide(Client *c)
  	if (ISVISIBLE(c, c->mon)) {
  		/* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
@@ -524,7 +525,7 @@ Index: dwm/dwm.c
  		showhide(c->snext);
  	} else {
  		/* hide clients bottom up */
-@@ -1885,7 +2070,18 @@ togglebar(const Arg *arg)
+@@ -1885,7 +2071,18 @@ togglebar(const Arg *arg)
  {
  	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
  	updatebarpos(selmon);
@@ -544,7 +545,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -2031,11 +2227,18 @@ unmapnotify(XEvent *e)
+@@ -2031,11 +2228,18 @@ unmapnotify(XEvent *e)
  		else
  			unmanage(c, 0);
  	}
@@ -563,7 +564,7 @@ Index: dwm/dwm.c
  	Monitor *m;
  	XSetWindowAttributes wa = {
  		.override_redirect = True,
-@@ -2045,10 +2248,15 @@ updatebars(void)
+@@ -2045,10 +2249,15 @@ updatebars(void)
  	for (m = mons; m; m = m->next) {
  		if (m->barwin)
  			continue;
@@ -580,7 +581,7 @@ Index: dwm/dwm.c
  		XMapRaised(dpy, m->barwin);
  	}
  }
-@@ -2236,6 +2444,121 @@ updatestatus(void)
+@@ -2236,6 +2445,123 @@ updatestatus(void)
  		strcpy(stext, "dwm-"VERSION);
  	for(m = mons; m; m = m->next)
  		drawbar(m);
@@ -660,7 +661,9 @@ Index: dwm/dwm.c
 +		wa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
 +		XSelectInput(dpy, systray->win, SubstructureNotifyMask);
 +		XChangeProperty(dpy, systray->win, netatom[NetSystemTrayOrientation], XA_CARDINAL, 32,
-+				PropModeReplace, (unsigned char *)&systrayorientation, 1);
++				PropModeReplace, (unsigned char *)&netatom[NetSystemTrayOrientationHorz], 1);
++		XChangeProperty(dpy, systray->win, netatom[NetWMWindowType], XA_ATOM, 32,
++				PropModeAppend, (unsigned char *)&netatom[NetWMWindowTypeDock], 1);
 +		XChangeWindowAttributes(dpy, systray->win, CWEventMask|CWOverrideRedirect|CWBackPixel, &wa);
 +		XMapRaised(dpy, systray->win);
 +		XSetSelectionOwner(dpy, netatom[NetSystemTray], systray->win, CurrentTime);
@@ -702,7 +705,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -2334,6 +2657,16 @@ wintoclient(Window w)
+@@ -2334,6 +2660,16 @@ wintoclient(Window w)
  	return NULL;
  }
  
@@ -719,7 +722,7 @@ Index: dwm/dwm.c
  Monitor *
  wintomon(Window w)
  {
-@@ -2387,6 +2720,22 @@ xerrorstart(Display *dpy, XErrorEvent *e
+@@ -2387,6 +2723,22 @@ xerrorstart(Display *dpy, XErrorEvent *e
  	return -1;
  }
  

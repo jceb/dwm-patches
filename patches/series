@@ -33,3 +33,4 @@ shifttags.patch -p0
 single_tagset_all.patch -p0
 keepfloatingposition.patch
 systray.patch -p0
+wm_type_dock.patch
