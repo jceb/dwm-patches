@@ -7,7 +7,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -88,6 +88,7 @@ struct Client {
+@@ -89,6 +89,7 @@ struct Client {
  	char name[256];
  	float mina, maxa;
  	int x, y, w, h;
@@ -15,7 +15,7 @@ Index: dwm/dwm.c
  	int oldx, oldy, oldw, oldh;
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
-@@ -1076,6 +1077,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1074,6 +1075,10 @@ manage(Window w, XWindowAttributes *wa)
  	updatewindowtype(c);
  	updatesizehints(c);
  	updatewmhints(c);
@@ -26,7 +26,7 @@ Index: dwm/dwm.c
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, 0);
  	if (!c->isfloating)
-@@ -1715,8 +1720,16 @@ togglefloating(const Arg *arg)
+@@ -1709,8 +1714,16 @@ togglefloating(const Arg *arg)
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if (selmon->sel->isfloating)

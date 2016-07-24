@@ -5,31 +5,16 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -790,16 +790,13 @@ drawbar(Monitor *m)
- 	drw_text(drw, x, 0, w, bh, m->ltsymbol, 0);
- 	x += w;
- 	xx = x;
+@@ -772,7 +772,7 @@ drawbar(Monitor *m)
+ 	Client *c;
+ 
+ 	/* draw status first so it can be overdrawn by tags later */
 -	if (m == selmon) { /* status is only drawn on selected monitor */
--		w = TEXTW(stext);
--		x = m->ww - w;
--		if (x < xx) {
--			x = xx;
--			w = m->ww - xx;
--		}
--		drw_text(drw, x, 0, w, bh, stext, 0);
--	} else
--		x = m->ww;
-+	w = TEXTW(stext);
-+	x = m->ww - w;
-+	if(x < xx) {
-+		x = xx;
-+		w = m->ww - xx;
-+	}
-+	drw_text(drw, x, 0, w, bh, stext, 0);
- 	if ((w = x - xx) > bh) {
- 		x = xx;
- 		if (m->sel) {
-@@ -2152,9 +2149,11 @@ updatetitle(Client *c)
++	if (m == selmon || 1) { /* status is only drawn on selected monitor */
+ 		drw_setscheme(drw, scheme[SchemeNorm]);
+ 		sw = TEXTW(stext) - lrpad / 2; /* no right padding so status text hugs the corner */
+ 		drw_text(drw, m->ww - sw, 0, sw, bh, lrpad / 2 - 2, stext, 0);
+@@ -2145,9 +2145,11 @@ updatetitle(Client *c)
  void
  updatestatus(void)
  {

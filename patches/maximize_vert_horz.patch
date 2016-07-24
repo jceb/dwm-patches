@@ -7,7 +7,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -93,7 +93,7 @@ struct Client {
+@@ -94,7 +94,7 @@ struct Client {
  	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
  	int bw, oldbw;
  	unsigned int tags;
@@ -16,7 +16,7 @@ Index: dwm/dwm.c
  	Client *next;
  	Client *snext;
  	Monitor *mon;
-@@ -1083,6 +1083,8 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1081,6 +1081,8 @@ manage(Window w, XWindowAttributes *wa)
  	c->sfh = c->h;
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, 0);

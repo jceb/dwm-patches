@@ -9,15 +9,15 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -70,6 +70,7 @@ static char dmenumon[2] = "0"; /* compon
- static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+@@ -73,6 +73,7 @@ static char dmenumon[2] = "0"; /* compon
+ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
  static const char *termcmd[]  = { "x-terminal-emulator", NULL };
  
 +#include "toggleview_focus.c"
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-@@ -87,6 +88,7 @@ static Key keys[] = {
+@@ -90,6 +91,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
