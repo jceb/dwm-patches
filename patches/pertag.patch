@@ -138,7 +138,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1724,7 +1763,7 @@ tile(Monitor *m)
+@@ -1725,7 +1764,7 @@ tile(Monitor *m)
  void
  togglebar(const Arg *arg)
  {
@@ -147,7 +147,7 @@ Index: dwm/dwm.c
  	updatebarpos(selmon);
  	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
  	arrange(selmon);
-@@ -1775,9 +1814,29 @@ void
+@@ -1776,9 +1815,29 @@ void
  toggleview(const Arg *arg)
  {
  	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);
@@ -177,7 +177,7 @@ Index: dwm/dwm.c
  		focus(NULL);
  		arrange(selmon);
  	}
-@@ -2076,11 +2135,32 @@ updatewmhints(Client *c)
+@@ -2079,11 +2138,32 @@ updatewmhints(Client *c)
  void
  view(const Arg *arg)
  {
@@ -211,7 +211,7 @@ Index: dwm/dwm.c
  	focus(NULL);
  	arrange(selmon);
  }
-@@ -2162,11 +2242,11 @@ zoom(const Arg *arg)
+@@ -2165,11 +2245,11 @@ zoom(const Arg *arg)
  	|| (selmon->sel && selmon->sel->isfloating))
  		return;
  	if (c == nexttiled(selmon->clients)) {
@@ -226,7 +226,7 @@ Index: dwm/dwm.c
  			if(!c || !(c = prevclient = nexttiled(c->next)))
  				return;
  		} else
-@@ -2179,7 +2259,7 @@ zoom(const Arg *arg)
+@@ -2182,7 +2262,7 @@ zoom(const Arg *arg)
  	attach(c);
  	/* swap windows instead of pushing the previous one down */
  	if (c != cold && at) {

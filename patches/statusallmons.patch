@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  		drw_setscheme(drw, scheme[SchemeNorm]);
  		sw = TEXTW(stext) - lrpad / 2; /* no right padding so status text hugs the corner */
  		drw_text(drw, m->ww - sw, 0, sw, bh, lrpad / 2 - 2, stext, 0);
-@@ -2145,9 +2145,11 @@ updatetitle(Client *c)
+@@ -2148,9 +2148,11 @@ updatetitle(Client *c)
  void
  updatestatus(void)
  {

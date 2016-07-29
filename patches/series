@@ -1,4 +1,5 @@
 personal_configh.patch -p0 -p0 #+personal_configh
+wm_type_dock.patch
 toggleview_focus_client.patch -p0
 #disable_focus_stealing.patch -p0 #+disabled
 #single_tagset.patch -p0 #+broken
@@ -33,4 +34,3 @@ shifttags.patch -p0
 single_tagset_all.patch -p0
 keepfloatingposition.patch
 systray.patch -p0
-wm_type_dock.patch

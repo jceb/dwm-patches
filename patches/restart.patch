@@ -23,7 +23,7 @@ Index: dwm/dwm.c
  	running = 0;
  }
  
-@@ -2134,6 +2137,8 @@ main(int argc, char *argv[])
+@@ -2137,6 +2140,8 @@ main(int argc, char *argv[])
  	setup();
  	scan();
  	run();

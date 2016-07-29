@@ -371,7 +371,7 @@ Index: dwm/dwm.c
  	root = RootWindow(dpy, screen);
  	drw = drw_create(dpy, screen, root, sw, sh);
  	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
-@@ -1692,7 +1752,7 @@ showhide(Client *c)
+@@ -1693,7 +1753,7 @@ showhide(Client *c)
  {
  	if (!c)
  		return;
@@ -380,7 +380,7 @@ Index: dwm/dwm.c
  		/* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
-@@ -1733,7 +1793,7 @@ void
+@@ -1734,7 +1794,7 @@ void
  swapfocus()
  {
  	Client *c;
@@ -389,7 +389,7 @@ Index: dwm/dwm.c
  	if(c == prevclient) {
  		focus(prevclient);
  		restack(prevclient->mon);
-@@ -1743,7 +1803,22 @@ swapfocus()
+@@ -1744,7 +1804,22 @@ swapfocus()
  void
  tag(const Arg *arg)
  {
@@ -412,7 +412,7 @@ Index: dwm/dwm.c
  		selmon->sel->tags = arg->ui & TAGMASK;
  		focus(NULL);
  		arrange(selmon);
-@@ -1764,7 +1839,7 @@ tile(Monitor *m)
+@@ -1765,7 +1840,7 @@ tile(Monitor *m)
  	unsigned int i, n, h, mw, my, ty, r;
  	Client *c;
  
@@ -421,7 +421,7 @@ Index: dwm/dwm.c
  	if (n == 0)
  		return;
  
-@@ -1772,7 +1847,7 @@ tile(Monitor *m)
+@@ -1773,7 +1848,7 @@ tile(Monitor *m)
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
@@ -430,7 +430,7 @@ Index: dwm/dwm.c
  		if(n == 1) {
  			if (c->bw) {
  				/* remove border when only one window is on the current tag */
-@@ -1847,12 +1922,17 @@ togglefloating(const Arg *arg)
+@@ -1848,12 +1923,17 @@ togglefloating(const Arg *arg)
  void
  toggletag(const Arg *arg)
  {
@@ -448,7 +448,7 @@ Index: dwm/dwm.c
  		selmon->sel->tags = newtags;
  		focus(NULL);
  		arrange(selmon);
-@@ -1862,10 +1942,15 @@ toggletag(const Arg *arg)
+@@ -1863,10 +1943,15 @@ toggletag(const Arg *arg)
  void
  toggleview(const Arg *arg)
  {
@@ -464,7 +464,7 @@ Index: dwm/dwm.c
  		if(newtagset == ~0) {
  			selmon->pertag->prevtag = selmon->pertag->curtag;
  			selmon->pertag->curtag = 0;
-@@ -1884,6 +1969,7 @@ toggleview(const Arg *arg)
+@@ -1885,6 +1970,7 @@ toggleview(const Arg *arg)
  		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
  		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
  		selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
@@ -472,7 +472,7 @@ Index: dwm/dwm.c
  		if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
  			togglebar(NULL);
  		focus(NULL);
-@@ -1986,7 +2072,7 @@ updateclientlist()
+@@ -1989,7 +2075,7 @@ updateclientlist()
  
  	XDeleteProperty(dpy, root, netatom[NetClientList]);
  	for (m = mons; m; m = m->next)
@@ -481,7 +481,7 @@ Index: dwm/dwm.c
  			XChangeProperty(dpy, root, netatom[NetClientList],
  			                XA_WINDOW, 32, PropModeAppend,
  			                (unsigned char *) &(c->win), 1);
-@@ -2016,8 +2102,10 @@ updategeom(void)
+@@ -2019,8 +2105,10 @@ updategeom(void)
  		if (n <= nn) {
  			for (i = 0; i < (nn - n); i++) { /* new monitors available */
  				for (m = mons; m && m->next; m = m->next);
@@ -493,7 +493,7 @@ Index: dwm/dwm.c
  				else
  					mons = createmon();
  			}
-@@ -2038,17 +2126,13 @@ updategeom(void)
+@@ -2041,17 +2129,13 @@ updategeom(void)
  			/* less monitors available nn < n */
  			for (i = nn; i < n; i++) {
  				for (m = mons; m && m->next; m = m->next);
@@ -516,7 +516,7 @@ Index: dwm/dwm.c
  				cleanupmon(m);
  			}
  		}
-@@ -2186,10 +2270,28 @@ updatewmhints(Client *c)
+@@ -2189,10 +2273,28 @@ updatewmhints(Client *c)
  void
  view(const Arg *arg)
  {
@@ -545,7 +545,7 @@ Index: dwm/dwm.c
  	selmon->seltags ^= 1; /* toggle sel tagset */
  	if (arg->ui & TAGMASK) {
  		selmon->pertag->prevtag = selmon->pertag->curtag;
-@@ -2210,6 +2312,7 @@ view(const Arg *arg)
+@@ -2213,6 +2315,7 @@ view(const Arg *arg)
  	selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
  	selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
  	selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
@@ -553,7 +553,7 @@ Index: dwm/dwm.c
  	if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
  		togglebar(NULL);
  	focus(NULL);
-@@ -2223,7 +2326,7 @@ wintoclient(Window w)
+@@ -2226,7 +2329,7 @@ wintoclient(Window w)
  	Monitor *m;
  
  	for (m = mons; m; m = m->next)
@@ -562,7 +562,7 @@ Index: dwm/dwm.c
  			if (c->win == w)
  				return c;
  	return NULL;
-@@ -2286,24 +2389,24 @@ void
+@@ -2289,24 +2392,24 @@ void
  zoom(const Arg *arg)
  {
  	Client *c = selmon->sel;

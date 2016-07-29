@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -2155,14 +2156,38 @@ zoom(const Arg *arg)
+@@ -2158,14 +2159,38 @@ zoom(const Arg *arg)
  {
  	Client *c = selmon->sel;
  	prevclient = nexttiled(selmon->clients);
