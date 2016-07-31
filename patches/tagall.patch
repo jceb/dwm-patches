@@ -1,5 +1,5 @@
 Author: Jan Christoph Ebersbach <jceb@e-jc.de>
-URL: http://dwm.suckless.org/patches/historical/tagall
+URL: http://dwm.suckless.org/patches/tagall
 Shortcut to move all (floating) windows from one tag to another.
 
 Index: dwm/tagall.c

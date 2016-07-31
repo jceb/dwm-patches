@@ -1,5 +1,5 @@
 Author: Jan Christoph Ebersbach <jceb@e-jc.de>
-URL: http://dwm.suckless.org/patches/historical/moveresize
+URL: http://dwm.suckless.org/patches/moveresize
 These patches provide helper functions for moving and resizing floating windows
 using keybindings.
 
