@@ -24,7 +24,7 @@ Index: dwm/config.def.h
  };
  
  /* tagging */
-@@ -27,12 +28,25 @@ static const Rule rules[] = {
+@@ -27,12 +28,26 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -45,6 +45,7 @@ Index: dwm/config.def.h
 +	{ "krunner",  NULL,       NULL,       0,            1,           -1 },
 +	{ "Scratchpad", NULL,     NULL,       1,            1,           -1 },
 +	{ "copyq",    NULL,       NULL,       0,            1,           -1 },
++	{ "Copyq",    NULL,       NULL,       0,            1,           -1 },
  };
  
  /* layout(s) */
@@ -53,7 +54,7 @@ Index: dwm/config.def.h
  static const int nmaster     = 1;    /* number of clients in master area */
  static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
  
-@@ -44,7 +58,7 @@ static const Layout layouts[] = {
+@@ -44,7 +59,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -62,7 +63,7 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -57,7 +71,7 @@ static const Layout layouts[] = {
+@@ -57,7 +72,7 @@ static const Layout layouts[] = {
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
  static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
@@ -71,7 +72,7 @@ Index: dwm/config.def.h
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -76,7 +90,7 @@ static Key keys[] = {
+@@ -76,7 +91,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
