@@ -144,7 +144,7 @@ Index: dwm/dwm.c
 +	/* collect information about the tags in use */
 +	for (tm = mons; tm; tm = tm->next)
 +		if(tm != m)
-+			utags |= m->tagset[m->seltags];
++			utags |= tm->tagset[tm->seltags];
 +
 +	for (c = m->cl->clients; c; c = c->next)
 +		if(ISVISIBLE(c, m)) {
