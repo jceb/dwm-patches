@@ -720,3 +720,16 @@ Index: dwm/zoomswap.c
 +	for(tmp = selmon->cl->clients; tmp && tmp->next != c; tmp = tmp->next) ;
  	return tmp;
  }
+Index: dwm/focusurgent.c
+===================================================================
+--- dwm/focusurgent.c.orig
++++ dwm/focusurgent.c
+@@ -2,7 +2,7 @@ static void
+ focusurgent(const Arg *arg) {
+ 	Client *c;
+ 	int i;
+-	for(c=selmon->clients; c && !c->isurgent; c=c->next);
++	for(c=selmon->cl->clients; c && !c->isurgent; c=c->next);
+ 	if(c && c->isurgent) {
+ 		for(i=0; i < LENGTH(tags) && !((1 << i) & c->tags); i++);
+ 		if(i < LENGTH(tags)) {

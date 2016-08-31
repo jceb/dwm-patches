@@ -1,0 +1,45 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: None yet
+focusurgent selects the next window having the urgent flag regardless of the tag
+it is on.  The urgent flag can be artificially set with the following xdotool
+command on any window: xdotool selectwindow -- set_window --urgency 1
+
+Index: dwm-patches/dwm/config.def.h
+===================================================================
+--- dwm-patches.orig/dwm/config.def.h
++++ dwm-patches/dwm/config.def.h
+@@ -85,6 +85,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "push.c"
+ #include "focusmaster.c"
+ #include "shifttags.c"
++#include "focusurgent.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -155,6 +156,7 @@ static Key keys[] = {
+ 	{ MODKEY|ControlMask,           XK_Return, focusmaster,    {0} },
+ 	{ MODKEY,                       XK_Left,   shifttags,      {.i = -1} },
+ 	{ MODKEY,                       XK_Right,  shifttags,      {.i = +1} },
++	{ MODKEY,                       XK_u,      focusurgent,     {0} },
+ };
+ 
+ /* button definitions */
+Index: dwm-patches/dwm/focusurgent.c
+===================================================================
+--- /dev/null
++++ dwm-patches/dwm/focusurgent.c
+@@ -0,0 +1,14 @@
++static void
++focusurgent(const Arg *arg) {
++	Client *c;
++	int i;
++	for(c=selmon->clients; c && !c->isurgent; c=c->next);
++	if(c && c->isurgent) {
++		for(i=0; i < LENGTH(tags) && !((1 << i) & c->tags); i++);
++		if(i < LENGTH(tags)) {
++			const Arg a = {.ui = 1 << i};
++			view(&a);
++			focus(c);
++		}
++	}
++}

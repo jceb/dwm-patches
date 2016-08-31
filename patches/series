@@ -31,6 +31,7 @@ configh_focusmaster.patch -p0 #+personal_configh
 focusmaster.patch -p0
 configh_shifttags.patch -p0 #+personal_configh
 shifttags.patch -p0
+focusurgent.patch
 single_tagset_all.patch -p0
 keepfloatingposition.patch
 systray.patch -p0
