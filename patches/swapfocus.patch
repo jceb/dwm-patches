@@ -8,7 +8,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -209,6 +209,7 @@ static void setup(void);
+@@ -209,6 +209,7 @@ static void seturgent(Client *c, int urg
  static void showhide(Client *c);
  static void sigchld(int unused);
  static void spawn(const Arg *arg);
@@ -24,7 +24,7 @@ Index: dwm/dwm.c
  static const char broken[] = "broken";
  static char stext[256];
  static int screen;
-@@ -1665,6 +1667,17 @@ spawn(const Arg *arg)
+@@ -1677,6 +1679,17 @@ spawn(const Arg *arg)
  }
  
  void
@@ -42,7 +42,7 @@ Index: dwm/dwm.c
  tag(const Arg *arg)
  {
  	if (selmon->sel && arg->ui & TAGMASK) {
-@@ -1775,6 +1788,7 @@ unfocus(Client *c, int setfocus)
+@@ -1787,6 +1800,7 @@ unfocus(Client *c, int setfocus)
  {
  	if (!c)
  		return;
@@ -50,7 +50,7 @@ Index: dwm/dwm.c
  	grabbuttons(c, 0);
  	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm][ColBorder].pixel);
  	if (setfocus) {
-@@ -2143,12 +2157,13 @@ void
+@@ -2155,12 +2169,13 @@ void
  zoom(const Arg *arg)
  {
  	Client *c = selmon->sel;

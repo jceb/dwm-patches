@@ -4,22 +4,22 @@ Index: dwm-patches/dwm/dwm.c
 +++ dwm-patches/dwm/dwm.c
 @@ -62,7 +62,7 @@
  enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
- enum { SchemeNorm, SchemeSel, SchemeLast }; /* color schemes */
- enum { NetSupported, NetWMName, NetWMState,
+ enum { SchemeNorm, SchemeSel }; /* color schemes */
+ enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
 -       NetWMFullscreen, NetActiveWindow, NetWMWindowType,
 +       NetWMFullscreen, NetActiveWindow, NetWMWindowType, NetWMWindowTypeDock,
         NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
  enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
  enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-@@ -1576,6 +1576,7 @@ setup(void)
- 	netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
+@@ -1565,6 +1565,7 @@ setup(void)
+ 	netatom[NetWMCheck] = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
  	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
  	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 +	netatom[NetWMWindowTypeDock] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DOCK", False);
  	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
  	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
  	/* init cursors */
-@@ -1806,6 +1807,8 @@ updatebars(void)
+@@ -1818,6 +1819,8 @@ updatebars(void)
  		m->barwin = XCreateWindow(dpy, root, m->wx, m->by, m->ww, bh, 0, DefaultDepth(dpy, screen),
  		                          CopyFromParent, DefaultVisual(dpy, screen),
  		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);

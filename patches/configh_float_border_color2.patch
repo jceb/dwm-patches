@@ -3,7 +3,7 @@ Index: dwm/config.def.h
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
 @@ -16,7 +16,7 @@ static const char col_red[]         = "#
- static const char *colors[SchemeLast][4]      = {
+ static const char *colors[][4]      = {
  	/*               fg         bg         border     float */
  	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
 -	[SchemeSel] =  { col_gray4, col_cyan,  col_red,   col_cyan },
