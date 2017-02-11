@@ -1,0 +1,45 @@
+Author: Jan Christoph Ebersbach <jceb@e-jc.de>
+URL: http://dwm.suckless.org/patches/clear-layout
+clear layout hides all visible clients so that you can enjoy your nice wallpaper
+
+Index: dwm-patches/dwm/clear.c
+===================================================================
+--- /dev/null
++++ dwm-patches/dwm/clear.c
+@@ -0,0 +1,9 @@
++void
++clear(Monitor *m) {
++	Client *c;
++	for (c = m->stack; c; c = c->snext) {
++		if(ISVISIBLE(c)) {
++			XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
++		}
++	}
++}
+Index: dwm-patches/dwm/config.def.h
+===================================================================
+--- dwm-patches.orig/dwm/config.def.h
++++ dwm-patches/dwm/config.def.h
+@@ -53,12 +53,14 @@ static const int nmaster     = 1;    /*
+ static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+ 
+ #include "gaplessgrid.c"
++#include "clear.c"
+ static const Layout layouts[] = {
+ 	/* symbol     arrange function */
+ 	{ "[]=",      tile },    /* first entry is default */
+ 	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
+ 	{ "+++",      gaplessgrid },
++	{ "[ ]",      clear },
+ };
+ 
+ /* key definitions */
+@@ -107,6 +109,7 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
++	{ MODKEY,                       XK_c,      setlayout,      {.v = &layouts[4]} },
+ 	{ MODKEY,                       XK_space,  toggleview_focus, {.ui = 1} },
+ 	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },

@@ -724,3 +724,18 @@ Index: dwm/focusurgent.c
  	if(c) {
  		for(i=0; i < LENGTH(tags) && !((1 << i) & c->tags); i++);
  		if(i < LENGTH(tags)) {
+Index: dwm/clear.c
+===================================================================
+--- dwm/clear.c.orig
++++ dwm/clear.c
+@@ -1,8 +1,8 @@
+ void
+ clear(Monitor *m) {
+ 	Client *c;
+-	for (c = m->stack; c; c = c->snext) {
+-		if(ISVISIBLE(c)) {
++	for (c = m->cl->stack; c; c = c->snext) {
++		if(ISVISIBLE(c, m)) {
+ 			XMoveWindow(dpy, c->win, WIDTH(c) * -2, c->y);
+ 		}
+ 	}
