@@ -8,12 +8,12 @@ Index: dwm/config.def.h
 +++ dwm/config.def.h
 @@ -13,10 +13,10 @@ static const char col_gray3[]       = "#
  static const char col_gray4[]       = "#EDEDED";
- static const char col_cyan[]        = "#005577";
+ static const char col_cyan[]        = "#005f87";
  static const char col_red[]         = "#D7005F";
 -static const char *colors[][3]      = {
 -	/*               fg         bg         border   */
 -	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
--	[SchemeSel] =  { col_gray4, col_cyan,  col_red  },
+-	[SchemeSel]  = { col_gray4, col_cyan,  col_red  },
 +static const char *colors[][4]      = {
 +	/*               fg         bg         border     float */
 +	[SchemeNorm] = { col_gray3, col_gray1, col_gray2, col_gray2 },
@@ -33,7 +33,7 @@ Index: dwm/dwm.c
  
  /* enums */
  enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-@@ -796,7 +797,10 @@ focus(Client *c)
+@@ -798,7 +799,10 @@ focus(Client *c)
  		detachstack(c);
  		attachstack(c);
  		grabbuttons(c, 1);
@@ -66,7 +66,7 @@ Index: dwm/dwm.c
  	attach(c);
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
-@@ -1585,7 +1594,7 @@ setup(void)
+@@ -1582,7 +1591,7 @@ setup(void)
  	/* init appearance */
  	scheme = ecalloc(LENGTH(colors), sizeof(Scm));
  	for (i = 0; i < LENGTH(colors); i++)
@@ -75,7 +75,7 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1729,6 +1738,10 @@ togglefloating(const Arg *arg)
+@@ -1727,6 +1736,10 @@ togglefloating(const Arg *arg)
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if (selmon->sel->isfloating)

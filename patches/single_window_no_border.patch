@@ -36,7 +36,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1747,7 +1756,7 @@ tagmon(const Arg *arg)
+@@ -1745,7 +1754,7 @@ tagmon(const Arg *arg)
  void
  tile(Monitor *m)
  {
@@ -45,7 +45,7 @@ Index: dwm/dwm.c
  	Client *c;
  
  	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-@@ -1758,16 +1767,35 @@ tile(Monitor *m)
+@@ -1756,16 +1765,35 @@ tile(Monitor *m)
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
@@ -82,7 +82,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1791,10 +1819,16 @@ togglefloating(const Arg *arg)
+@@ -1789,10 +1817,16 @@ togglefloating(const Arg *arg)
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloat].pixel);
  	else
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
