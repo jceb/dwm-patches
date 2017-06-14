@@ -67,11 +67,13 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -57,7 +73,7 @@ static const Layout layouts[] = {
+@@ -56,8 +72,8 @@ static const Layout layouts[] = {
+ 
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
- static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 -static const char *termcmd[]  = { "st", NULL };
++static const char *dmenucmd[] = { "dmenu_run", "-i", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 +static const char *termcmd[]  = { "x-terminal-emulator", NULL };
  
  static Key keys[] = {
