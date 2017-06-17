@@ -302,7 +302,7 @@ Index: dwm/dwm.c
  
 -	if (XGetWindowProperty(dpy, c->win, prop, 0L, sizeof atom, False, XA_ATOM,
 +	if (XGetWindowProperty(dpy, c->win, prop, 0L, sizeof atom, False, req,
- 	                      &da, &di, &dl, &dl, &p) == Success && p) {
+ 		&da, &di, &dl, &dl, &p) == Success && p) {
  		atom = *(Atom *)p;
 +		if (da == xatom[XembedInfo] && dl == 2)
 +			atom = ((Atom *)p)[1];
@@ -470,8 +470,8 @@ Index: dwm/dwm.c
  	return exists;
  }
 @@ -1605,7 +1782,7 @@ setfocus(Client *c)
- 		                XA_WINDOW, 32, PropModeReplace,
- 		                (unsigned char *) &(c->win), 1);
+ 			XA_WINDOW, 32, PropModeReplace,
+ 			(unsigned char *) &(c->win), 1);
  	}
 -	sendevent(c, wmatom[WMTakeFocus]);
 +	sendevent(c->win, wmatom[WMTakeFocus], NoEventMask, wmatom[WMTakeFocus], CurrentTime, 0, 0, 0);
@@ -571,8 +571,8 @@ Index: dwm/dwm.c
 +		if (showsystray && m == systraytomon(m))
 +			w -= getsystraywidth();
 +		m->barwin = XCreateWindow(dpy, root, m->wx, m->by, w, bh, 0, DefaultDepth(dpy, screen),
- 		                          CopyFromParent, DefaultVisual(dpy, screen),
- 		                          CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
+ 				CopyFromParent, DefaultVisual(dpy, screen),
+ 				CWOverrideRedirect|CWBackPixmap|CWEventMask, &wa);
  		XChangeProperty(dpy, m->barwin, netatom[NetWMWindowType], XA_ATOM, 32,
  				PropModeReplace, (unsigned char *) & netatom[NetWMWindowTypeDock], 1);
  		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);

@@ -31,7 +31,7 @@ Index: dwm/dwm.c
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if (selmon->sel->isfloating)
 -		resize(selmon->sel, selmon->sel->x, selmon->sel->y,
--		       selmon->sel->w, selmon->sel->h, 0);
+-			selmon->sel->w, selmon->sel->h, 0);
 +		/*restore last known float dimensions*/
 +		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy,
 +		       selmon->sel->sfw, selmon->sel->sfh, 0);
