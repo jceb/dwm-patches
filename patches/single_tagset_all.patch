@@ -470,8 +470,8 @@ Index: dwm/dwm.c
 -		for (c = m->clients; c; c = c->next)
 +		for (c = m->cl->clients; c; c = c->next)
  			XChangeProperty(dpy, root, netatom[NetClientList],
- 			                XA_WINDOW, 32, PropModeAppend,
- 			                (unsigned char *) &(c->win), 1);
+ 				XA_WINDOW, 32, PropModeAppend,
+ 				(unsigned char *) &(c->win), 1);
 @@ -2025,8 +2111,10 @@ updategeom(void)
  		if (n <= nn) { /* new monitors available */
  			for (i = 0; i < (nn - n); i++) {

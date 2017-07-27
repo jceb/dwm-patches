@@ -44,7 +44,7 @@ Index: dwm/dwm.c
 +	attachabove(c);
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
- 	                (unsigned char *) &(c->win), 1);
+ 		(unsigned char *) &(c->win), 1);
 @@ -1483,7 +1498,7 @@ sendmon(Client *c, Monitor *m)
  	detachstack(c);
  	c->mon = m;

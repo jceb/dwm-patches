@@ -20,7 +20,7 @@ Index: dwm-patches/dwm/config.def.h
 ===================================================================
 --- dwm-patches.orig/dwm/config.def.h
 +++ dwm-patches/dwm/config.def.h
-@@ -53,12 +53,14 @@ static const int nmaster     = 1;    /*
+@@ -54,12 +54,14 @@ static const int nmaster     = 1;    /*
  static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
  
  #include "gaplessgrid.c"
@@ -35,7 +35,7 @@ Index: dwm-patches/dwm/config.def.h
  };
  
  /* key definitions */
-@@ -107,6 +109,7 @@ static Key keys[] = {
+@@ -108,6 +110,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
  	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },

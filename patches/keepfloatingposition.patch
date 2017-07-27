@@ -56,7 +56,7 @@ Index: dwm-patches/dwm/config.def.h
 ===================================================================
 --- dwm-patches.orig/dwm/config.def.h
 +++ dwm-patches/dwm/config.def.h
-@@ -88,6 +88,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -89,6 +89,7 @@ static const char *termcmd[]  = { "x-ter
  #include "focusmaster.c"
  #include "shifttags.c"
  #include "focusurgent.c"

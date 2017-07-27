@@ -27,7 +27,7 @@ Index: dwm/config.def.h
  };
  
  /* tagging */
-@@ -27,12 +28,27 @@ static const Rule rules[] = {
+@@ -27,12 +28,28 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -39,7 +39,7 @@ Index: dwm/config.def.h
 +	{ "Empathy",  NULL,       NULL,       0,            1,           -1 },
 +	{ "Gajim",    NULL,       NULL,       0,            1,           -1 },
 +	{ "Skype",    NULL,       NULL,       0,            1,           -1 },
-+	{ "skypeforlinux",    NULL,       NULL,       0,            1,           -1 },
++	{ "skypeforlinux", NULL,  NULL,       0,            1,           -1 },
 +	{ "Kio_uiserver", NULL,   NULL,       0,            1,           -1 },
 +	{ "Xchat",    NULL,       NULL,       1,            1,           -1 },
 +	{ "Hexchat",  NULL,       NULL,       1,            1,           -1 },
@@ -50,6 +50,7 @@ Index: dwm/config.def.h
 +	{ "Scratchpad", NULL,     NULL,       1,            1,           -1 },
 +	{ "copyq",    NULL,       NULL,       0,            1,           -1 },
 +	{ "Copyq",    NULL,       NULL,       0,            1,           -1 },
++	{ "Psi-plus", NULL,       NULL,       0,            1,           -1 },
  };
  
  /* layout(s) */
@@ -58,7 +59,7 @@ Index: dwm/config.def.h
  static const int nmaster     = 1;    /* number of clients in master area */
  static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
  
-@@ -44,7 +60,7 @@ static const Layout layouts[] = {
+@@ -44,7 +61,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -67,7 +68,7 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -56,8 +72,8 @@ static const Layout layouts[] = {
+@@ -56,8 +73,8 @@ static const Layout layouts[] = {
  
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -78,7 +79,7 @@ Index: dwm/config.def.h
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -76,7 +92,7 @@ static Key keys[] = {
+@@ -76,7 +93,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
