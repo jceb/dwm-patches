@@ -16,11 +16,13 @@ configh_maximize_vert_horz.patch -p0 #+personal_configh
 maximize_vert_horz.patch -p0
 float_border_color2.patch -p0
 configh_float_border_color2.patch -p0 #+personal_configh
-swapfocus.patch -p0
 configh_swapfocus.patch -p0 #+personal_configh
+swapfocus.patch -p0
 zoomswap.patch -p0
-gaplessgrid.patch -p0
 configh_gaplesssgrid.patch -p0 #+personal_configh
+gaplessgrid.patch -p0
+configh_centeredmaster.patch -p0 #+personal_configh
+centeredmaster.patch -p0
 pertag.patch -p0
 single_window_no_border.patch -p0
 attachabove.patch -p0

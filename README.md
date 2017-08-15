@@ -22,6 +22,8 @@
 # Patch References
 
 * [attachabove.patch](patches/attachabove.patch)                         (http://dwm.suckless.org/patches/attachabove)
+* [centeredmaster.patch](patches/centeredmaster.patch)                   (http://dwm.suckless.org/patches/centeredmaster)
+* [clear-layout.patch](patches/clear-layout.patch)                       (no URL yet)
 * [float_border_color2.patch](patches/float_border_color2.patch)         (http://dwm.suckless.org/patches/historical/float_border_color)
 * [focusmaster.patch](patches/focusmaster.patch)                         (no URL yet)
 * [focusurgent.patch](patches/focusurgent.patch)                         (http://dwm.suckless.org/patches/focusurgent)
@@ -41,6 +43,7 @@
 * [systray.patch](patches/systray.patch)                                 (http://dwm.suckless.org/patches/systray)
 * [tagall.patch](patches/tagall.patch)                                   (http://dwm.suckless.org/patches/tagall)
 * [toggleview_focus_client.patch](patches/toggleview_focus_client.patch) (no URL yet)
+* [wm_type_dock.patch](patches/wm_type_dock.patch)                       (no URL yet)
 * [zoomswap.patch](patches/zoomswap.patch)                               (http://dwm.suckless.org/patches/zoomswap)
 
 # Patches, Not Maintained

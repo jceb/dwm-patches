@@ -1,0 +1,30 @@
+Index: dwm/config.def.h
+===================================================================
+--- dwm/config.def.h.orig
++++ dwm/config.def.h
+@@ -60,6 +60,8 @@ static const Layout layouts[] = {
+ 	{ "><>",      NULL },    /* no layout function means floating behavior */
+ 	{ "[M]",      monocle },
+ 	{ "+++",      gaplessgrid },
++	{ "|M|",      centeredmaster },
++	{ ">M>",      centeredfloatingmaster },
+ };
+ 
+ /* key definitions */
+@@ -83,6 +85,7 @@ static const char *termcmd[]  = { "x-ter
+ #include "tagall.c"
+ #include "maximize.c"
+ #include "zoomswap.c"
++#include "centredmaster.c"
+ static Key keys[] = {
+ 	/* modifier                     key        function        argument */
+ 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+@@ -102,6 +105,8 @@ static Key keys[] = {
+ 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
+ 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
++	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[4]} },
++	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[5]} },
+ 	{ MODKEY,                       XK_space,  toggleview_focus, {.ui = 1} },
+ 	{ MODKEY|ControlMask,           XK_space,  setlayout,      {0} },
+ 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
