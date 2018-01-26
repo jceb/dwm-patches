@@ -8,7 +8,7 @@ Index: dwm-patches/dwm/config.def.h
 ===================================================================
 --- dwm-patches.orig/dwm/config.def.h
 +++ dwm-patches/dwm/config.def.h
-@@ -90,6 +90,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -91,6 +91,7 @@ static const char *termcmd[]  = { "x-ter
  #include "push.c"
  #include "focusmaster.c"
  #include "shifttags.c"
@@ -16,7 +16,7 @@ Index: dwm-patches/dwm/config.def.h
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-@@ -162,6 +163,7 @@ static Key keys[] = {
+@@ -163,6 +164,7 @@ static Key keys[] = {
  	{ MODKEY|ControlMask,           XK_Return, focusmaster,    {0} },
  	{ MODKEY,                       XK_Left,   shifttags,      {.i = -1} },
  	{ MODKEY,                       XK_Right,  shifttags,      {.i = +1} },
