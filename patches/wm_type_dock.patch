@@ -11,7 +11,7 @@ Index: dwm-patches/dwm/dwm.c
         NetWMWindowTypeDialog, NetClientList, NetLast }; /* EWMH atoms */
  enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
  enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
-@@ -1562,6 +1562,7 @@ setup(void)
+@@ -1561,6 +1561,7 @@ setup(void)
  	netatom[NetWMCheck] = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
  	netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
  	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
@@ -27,4 +27,4 @@ Index: dwm-patches/dwm/dwm.c
 +				PropModeReplace, (unsigned char *) & netatom[NetWMWindowTypeDock], 1);
  		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
  		XMapRaised(dpy, m->barwin);
- 	}
+ 		XSetClassHint(dpy, m->barwin, &ch);

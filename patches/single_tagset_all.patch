@@ -302,7 +302,7 @@ Index: dwm/dwm.c
  					c = i;
  	}
  	if (c) {
-@@ -1179,12 +1239,12 @@ monocle(Monitor *m)
+@@ -1178,12 +1238,12 @@ monocle(Monitor *m)
  	unsigned int n = 0, r = 0;
  	Client *c;
  
@@ -318,7 +318,7 @@ Index: dwm/dwm.c
  		/* remove border when in monocle layout */
  		if(c->bw) {
  			c->oldbw = c->bw;
-@@ -1275,9 +1335,9 @@ movemouse(const Arg *arg)
+@@ -1274,9 +1334,9 @@ movemouse(const Arg *arg)
  }
  
  Client *
@@ -330,7 +330,7 @@ Index: dwm/dwm.c
  	return c;
  }
  
-@@ -1443,8 +1503,8 @@ restack(Monitor *m)
+@@ -1442,8 +1502,8 @@ restack(Monitor *m)
  	if (m->lt[m->sellt]->arrange) {
  		wc.stack_mode = Below;
  		wc.sibling = m->barwin;
@@ -341,7 +341,7 @@ Index: dwm/dwm.c
  				XConfigureWindow(dpy, c->win, CWSibling|CWStackMode, &wc);
  				wc.sibling = c->win;
  			}
-@@ -1497,11 +1557,9 @@ sendmon(Client *c, Monitor *m)
+@@ -1496,11 +1556,9 @@ sendmon(Client *c, Monitor *m)
  	if (c->mon == m)
  		return;
  	unfocus(c, 1);
@@ -353,7 +353,7 @@ Index: dwm/dwm.c
  	attachstack(c);
  	focus(NULL);
  	arrange(NULL);
-@@ -1627,6 +1685,8 @@ setup(void)
+@@ -1626,6 +1684,8 @@ setup(void)
  	screen = DefaultScreen(dpy);
  	sw = DisplayWidth(dpy, screen);
  	sh = DisplayHeight(dpy, screen);
@@ -362,7 +362,7 @@ Index: dwm/dwm.c
  	root = RootWindow(dpy, screen);
  	drw = drw_create(dpy, screen, root, sw, sh);
  	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
-@@ -1703,7 +1763,7 @@ showhide(Client *c)
+@@ -1702,7 +1762,7 @@ showhide(Client *c)
  {
  	if (!c)
  		return;
@@ -371,7 +371,7 @@ Index: dwm/dwm.c
  		/* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
-@@ -1744,7 +1804,7 @@ void
+@@ -1743,7 +1803,7 @@ void
  swapfocus()
  {
  	Client *c;
@@ -380,7 +380,7 @@ Index: dwm/dwm.c
  	if(c == prevclient) {
  		focus(prevclient);
  		restack(prevclient->mon);
-@@ -1754,7 +1814,22 @@ swapfocus()
+@@ -1753,7 +1813,22 @@ swapfocus()
  void
  tag(const Arg *arg)
  {
@@ -403,7 +403,7 @@ Index: dwm/dwm.c
  		selmon->sel->tags = arg->ui & TAGMASK;
  		focus(NULL);
  		arrange(selmon);
-@@ -1775,7 +1850,7 @@ tile(Monitor *m)
+@@ -1774,7 +1849,7 @@ tile(Monitor *m)
  	unsigned int i, n, h, mw, my, ty, r;
  	Client *c;
  
@@ -412,7 +412,7 @@ Index: dwm/dwm.c
  	if (n == 0)
  		return;
  
-@@ -1783,7 +1858,7 @@ tile(Monitor *m)
+@@ -1782,7 +1857,7 @@ tile(Monitor *m)
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
@@ -421,7 +421,7 @@ Index: dwm/dwm.c
  		if(n == 1) {
  			if (c->bw) {
  				/* remove border when only one window is on the current tag */
-@@ -1858,12 +1933,17 @@ togglefloating(const Arg *arg)
+@@ -1857,12 +1932,17 @@ togglefloating(const Arg *arg)
  void
  toggletag(const Arg *arg)
  {
@@ -439,7 +439,7 @@ Index: dwm/dwm.c
  		selmon->sel->tags = newtags;
  		focus(NULL);
  		arrange(selmon);
-@@ -1873,10 +1953,15 @@ toggletag(const Arg *arg)
+@@ -1872,10 +1952,15 @@ toggletag(const Arg *arg)
  void
  toggleview(const Arg *arg)
  {
@@ -455,7 +455,7 @@ Index: dwm/dwm.c
  		if(newtagset == ~0) {
  			selmon->pertag->prevtag = selmon->pertag->curtag;
  			selmon->pertag->curtag = 0;
-@@ -1895,6 +1980,7 @@ toggleview(const Arg *arg)
+@@ -1894,6 +1979,7 @@ toggleview(const Arg *arg)
  		selmon->sellt = selmon->pertag->sellts[selmon->pertag->curtag];
  		selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
  		selmon->lt[selmon->sellt^1] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt^1];
@@ -463,7 +463,7 @@ Index: dwm/dwm.c
  		if (selmon->showbar != selmon->pertag->showbars[selmon->pertag->curtag])
  			togglebar(NULL);
  		focus(NULL);
-@@ -1998,7 +2084,7 @@ updateclientlist()
+@@ -1999,7 +2085,7 @@ updateclientlist()
  
  	XDeleteProperty(dpy, root, netatom[NetClientList]);
  	for (m = mons; m; m = m->next)
@@ -472,7 +472,7 @@ Index: dwm/dwm.c
  			XChangeProperty(dpy, root, netatom[NetClientList],
  				XA_WINDOW, 32, PropModeAppend,
  				(unsigned char *) &(c->win), 1);
-@@ -2028,8 +2114,10 @@ updategeom(void)
+@@ -2029,8 +2115,10 @@ updategeom(void)
  		if (n <= nn) { /* new monitors available */
  			for (i = 0; i < (nn - n); i++) {
  				for (m = mons; m && m->next; m = m->next);
@@ -484,7 +484,7 @@ Index: dwm/dwm.c
  				else
  					mons = createmon();
  			}
-@@ -2049,16 +2137,13 @@ updategeom(void)
+@@ -2050,16 +2138,13 @@ updategeom(void)
  		} else { /* less monitors available nn < n */
  			for (i = nn; i < n; i++) {
  				for (m = mons; m && m->next; m = m->next);

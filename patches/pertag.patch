@@ -86,7 +86,7 @@ Index: dwm/dwm.c
  	return m;
  }
  
-@@ -979,7 +1012,7 @@ grabkeys(void)
+@@ -978,7 +1011,7 @@ grabkeys(void)
  void
  incnmaster(const Arg *arg)
  {
@@ -95,7 +95,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1526,10 +1559,13 @@ setfullscreen(Client *c, int fullscreen)
+@@ -1525,10 +1558,13 @@ setfullscreen(Client *c, int fullscreen)
  void
  setlayout(const Arg *arg)
  {
@@ -112,7 +112,7 @@ Index: dwm/dwm.c
  	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
  	if (selmon->sel)
  		arrange(selmon);
-@@ -1548,7 +1584,7 @@ setmfact(const Arg *arg)
+@@ -1547,7 +1583,7 @@ setmfact(const Arg *arg)
  	f = arg->f < 1.0 ? arg->f + selmon->mfact : arg->f - 1.0;
  	if (f < 0.1 || f > 0.9)
  		return;
@@ -121,7 +121,7 @@ Index: dwm/dwm.c
  	arrange(selmon);
  }
  
-@@ -1737,7 +1773,7 @@ tile(Monitor *m)
+@@ -1736,7 +1772,7 @@ tile(Monitor *m)
  void
  togglebar(const Arg *arg)
  {
@@ -130,7 +130,7 @@ Index: dwm/dwm.c
  	updatebarpos(selmon);
  	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
  	arrange(selmon);
-@@ -1788,9 +1824,29 @@ void
+@@ -1787,9 +1823,29 @@ void
  toggleview(const Arg *arg)
  {
  	unsigned int newtagset = selmon->tagset[selmon->seltags] ^ (arg->ui & TAGMASK);

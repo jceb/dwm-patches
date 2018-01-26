@@ -8,7 +8,7 @@ Index: dwm-patches/dwm/dwm.c
 ===================================================================
 --- dwm-patches.orig/dwm/dwm.c
 +++ dwm-patches/dwm/dwm.c
-@@ -1767,6 +1767,8 @@ showhide(Client *c)
+@@ -1766,6 +1766,8 @@ showhide(Client *c)
  		/* show clients top down */
  		XMoveWindow(dpy, c->win, c->x, c->y);
  		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
