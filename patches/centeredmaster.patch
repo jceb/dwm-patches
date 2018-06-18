@@ -109,7 +109,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -152,6 +152,8 @@ static void arrangemon(Monitor *m);
+@@ -150,6 +150,8 @@ static void arrangemon(Monitor *m);
  static void attach(Client *c);
  static void attachstack(Client *c);
  static void buttonpress(XEvent *e);

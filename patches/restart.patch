@@ -6,7 +6,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -262,6 +262,7 @@ static void (*handler[LASTEvent]) (XEven
+@@ -261,6 +261,7 @@ static void (*handler[LASTEvent]) (XEven
  };
  static Atom wmatom[WMLast], netatom[NetLast];
  static int running = 1;
@@ -14,7 +14,7 @@ Index: dwm/dwm.c
  static Cur *cursor[CurLast];
  static Clr **scheme;
  static Display *dpy;
-@@ -1249,6 +1250,8 @@ propertynotify(XEvent *e)
+@@ -1248,6 +1249,8 @@ propertynotify(XEvent *e)
  void
  quit(const Arg *arg)
  {
@@ -23,8 +23,8 @@ Index: dwm/dwm.c
  	running = 0;
  }
  
-@@ -2143,6 +2146,8 @@ main(int argc, char *argv[])
- 	setup();
+@@ -2146,6 +2149,8 @@ main(int argc, char *argv[])
+ #endif /* __OpenBSD__ */
  	scan();
  	run();
 +	if(restart)
