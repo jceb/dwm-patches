@@ -5,7 +5,7 @@ Index: dwm/config.def.h
 ===================================================================
 --- dwm/config.def.h.orig
 +++ dwm/config.def.h
-@@ -89,6 +89,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -90,6 +90,7 @@ static const char *termcmd[]  = { "x-ter
  #include "zoomswap.c"
  #include "centredmaster.c"
  #include "push.c"
@@ -13,7 +13,7 @@ Index: dwm/config.def.h
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-@@ -158,6 +159,7 @@ static Key keys[] = {
+@@ -159,6 +160,7 @@ static Key keys[] = {
  	{ MODKEY|ShiftMask,             XK_d,      moveresize,     {.v = "0x 0y 10w 0h" } },
  	{ MODKEY|ShiftMask,             XK_s,      moveresize,     {.v = "0x 0y 0w 10h" } },
  	{ MODKEY|ShiftMask,             XK_w,      moveresize,     {.v = "0x 0y 0w -10h" } },

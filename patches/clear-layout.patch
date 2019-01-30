@@ -20,7 +20,7 @@ Index: dwm-patches/dwm/config.def.h
 ===================================================================
 --- dwm-patches.orig/dwm/config.def.h
 +++ dwm-patches/dwm/config.def.h
-@@ -64,6 +64,7 @@ static const Layout layouts[] = {
+@@ -65,6 +65,7 @@ static const Layout layouts[] = {
  	{ "+++",      gaplessgrid },
  	{ "|M|",      centeredmaster },
  	{ ">M>",      centeredfloatingmaster },
@@ -28,7 +28,7 @@ Index: dwm-patches/dwm/config.def.h
  };
  
  /* key definitions */
-@@ -92,6 +93,7 @@ static const char *termcmd[]  = { "x-ter
+@@ -93,6 +94,7 @@ static const char *termcmd[]  = { "x-ter
  #include "focusmaster.c"
  #include "shifttags.c"
  #include "focusurgent.c"
@@ -36,7 +36,7 @@ Index: dwm-patches/dwm/config.def.h
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-@@ -115,6 +117,7 @@ static Key keys[] = {
+@@ -116,6 +118,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[3]} },
  	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[4]} },
  	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[5]} },

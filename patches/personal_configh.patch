@@ -27,7 +27,7 @@ Index: dwm/config.def.h
  };
  
  /* tagging */
-@@ -27,12 +28,30 @@ static const Rule rules[] = {
+@@ -27,12 +28,31 @@ static const Rule rules[] = {
  	 *	WM_NAME(STRING) = title
  	 */
  	/* class      instance    title       tags mask     isfloating   monitor */
@@ -53,6 +53,7 @@ Index: dwm/config.def.h
 +	{ "Psi-plus", NULL,       NULL,       0,            1,           -1 },
 +	{ "Riot",     NULL,       NULL,       1,            1,           -1 },
 +	{ "Rambox",   NULL,       NULL,       1,            1,           -1 },
++	{ "Standard Notes", NULL, NULL,       1,            1,           -1 },
  };
  
  /* layout(s) */
@@ -61,7 +62,7 @@ Index: dwm/config.def.h
  static const int nmaster     = 1;    /* number of clients in master area */
  static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
  
-@@ -44,7 +63,7 @@ static const Layout layouts[] = {
+@@ -44,7 +64,7 @@ static const Layout layouts[] = {
  };
  
  /* key definitions */
@@ -70,7 +71,7 @@ Index: dwm/config.def.h
  #define TAGKEYS(KEY,TAG) \
  	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
  	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-@@ -56,8 +75,8 @@ static const Layout layouts[] = {
+@@ -56,8 +76,8 @@ static const Layout layouts[] = {
  
  /* commands */
  static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -81,7 +82,7 @@ Index: dwm/config.def.h
  
  static Key keys[] = {
  	/* modifier                     key        function        argument */
-@@ -76,7 +95,7 @@ static Key keys[] = {
+@@ -76,7 +96,7 @@ static Key keys[] = {
  	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
  	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
  	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
