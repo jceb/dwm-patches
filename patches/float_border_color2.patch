@@ -25,7 +25,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -797,7 +797,10 @@ focus(Client *c)
+@@ -796,7 +796,10 @@ focus(Client *c)
  		detachstack(c);
  		attachstack(c);
  		grabbuttons(c, 1);
@@ -37,7 +37,7 @@ Index: dwm/dwm.c
  		setfocus(c);
  	} else {
  		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
-@@ -1053,7 +1056,10 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1052,7 +1055,10 @@ manage(Window w, XWindowAttributes *wa)
  
  	wc.border_width = c->bw;
  	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
@@ -49,7 +49,7 @@ Index: dwm/dwm.c
  	configure(c); /* propagates border_width, if size doesn't change */
  	updatewindowtype(c);
  	updatesizehints(c);
-@@ -1070,6 +1076,8 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1069,6 +1075,8 @@ manage(Window w, XWindowAttributes *wa)
  		c->isfloating = c->oldstate = trans != None || c->isfixed;
  	if (c->isfloating)
  		XRaiseWindow(dpy, c->win);
@@ -58,7 +58,7 @@ Index: dwm/dwm.c
  	attach(c);
  	attachstack(c);
  	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
-@@ -1580,7 +1588,7 @@ setup(void)
+@@ -1577,7 +1585,7 @@ setup(void)
  	/* init appearance */
  	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
  	for (i = 0; i < LENGTH(colors); i++)
@@ -67,7 +67,7 @@ Index: dwm/dwm.c
  	/* init bars */
  	updatebars();
  	updatestatus();
-@@ -1725,6 +1733,10 @@ togglefloating(const Arg *arg)
+@@ -1722,6 +1730,10 @@ togglefloating(const Arg *arg)
  		return;
  	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
  	if (selmon->sel->isfloating)

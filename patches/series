@@ -4,7 +4,7 @@ toggleview_focus_client.patch -p0
 #disable_focus_stealing.patch -p0 #+disabled
 #single_tagset.patch -p0 #+broken
 configh_restart.patch -p0 #+personal_configh
-restart.patch -p0
+# restart.patch -p0
 configh_moveresize.patch -p0 #+personal_configh
 moveresize.patch -p0
 #raiselower.patch -p0 #+broken

@@ -16,7 +16,7 @@ Index: dwm/dwm.c
  	Client *next;
  	Client *snext;
  	Monitor *mon;
-@@ -1064,6 +1064,8 @@ manage(Window w, XWindowAttributes *wa)
+@@ -1063,6 +1063,8 @@ manage(Window w, XWindowAttributes *wa)
  	c->sfh = c->h;
  	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
  	grabbuttons(c, 0);

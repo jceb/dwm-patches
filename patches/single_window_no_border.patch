@@ -7,7 +7,7 @@ Index: dwm/dwm.c
 ===================================================================
 --- dwm/dwm.c.orig
 +++ dwm/dwm.c
-@@ -1157,7 +1157,7 @@ maprequest(XEvent *e)
+@@ -1156,7 +1156,7 @@ maprequest(XEvent *e)
  void
  monocle(Monitor *m)
  {
@@ -16,7 +16,7 @@ Index: dwm/dwm.c
  	Client *c;
  
  	for (c = m->clients; c; c = c->next)
-@@ -1165,8 +1165,17 @@ monocle(Monitor *m)
+@@ -1164,8 +1164,17 @@ monocle(Monitor *m)
  			n++;
  	if (n > 0) /* override layout symbol */
  		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
@@ -36,7 +36,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1744,7 +1753,7 @@ tagmon(const Arg *arg)
+@@ -1741,7 +1750,7 @@ tagmon(const Arg *arg)
  void
  tile(Monitor *m)
  {
@@ -45,7 +45,7 @@ Index: dwm/dwm.c
  	Client *c;
  
  	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-@@ -1755,16 +1764,35 @@ tile(Monitor *m)
+@@ -1752,16 +1761,35 @@ tile(Monitor *m)
  		mw = m->nmaster ? m->ww * m->mfact : 0;
  	else
  		mw = m->ww;
@@ -82,7 +82,7 @@ Index: dwm/dwm.c
  }
  
  void
-@@ -1788,10 +1816,16 @@ togglefloating(const Arg *arg)
+@@ -1785,10 +1813,16 @@ togglefloating(const Arg *arg)
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColFloat].pixel);
  	else
  		XSetWindowBorder(dpy, selmon->sel->win, scheme[SchemeSel][ColBorder].pixel);
