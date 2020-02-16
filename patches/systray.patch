@@ -600,7 +600,7 @@ Index: dwm/dwm.c
 +		else
 +			i->w = (int) ((float)bh * ((float)w / (float)h));
 +		applysizehints(i, &(i->x), &(i->y), &(i->w), &(i->h), False);
-+		/* force icons into the systray dimenons if they don't want to */
++		/* force icons into the systray dimensions if they don't want to */
 +		if (i->h > bh) {
 +			if (i->w == i->h)
 +				i->w = bh;
